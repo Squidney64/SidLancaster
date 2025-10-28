@@ -110,7 +110,6 @@ nav {
     border: 2px solid rgba(78, 205, 196, 0.2);
     border-radius: 30px;
     background: rgba(10, 24, 33, 0.4);
-    backdrop-filter: blur(10px);
     gap: 0.5rem;
     padding: 0.6rem 1.2rem;
     color: var(--text-light);
@@ -148,7 +147,6 @@ nav {
     border: 2px solid rgba(78, 205, 196, 0.2);
     border-radius: 8px;
     background: rgba(10, 24, 33, 0.4);
-    backdrop-filter: blur(10px);
     color: var(--text-light);
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -362,7 +360,6 @@ section {
     border-radius: 15px;
     background: rgba(10, 24, 33, 0.3);
     border: 1px solid rgba(78, 205, 196, 0.15);
-    backdrop-filter: blur(10px);
 }
 
 .carousel-track {
@@ -479,17 +476,6 @@ section {
     color: var(--primary-warm);
 }
 
-.book-badge.badge-link {
-    text-decoration: none;
-    display: inline-block;
-}
-
-.book-badge.badge-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
-    border-color: rgba(78, 205, 196, 0.5);
-}
-
 .book-badge.warning {
     background: rgba(255, 107, 107, 0.1);
     border-color: rgba(255, 107, 107, 0.3);
@@ -578,7 +564,7 @@ section {
     top: clamp(16px, 4vw, 20px);
     left: calc(100% / 12);
     height: 3px;
-    background: linear-gradient(to right, #ff6b6b, #ff8c42, #ff8c42);
+    background: linear-gradient(to right, #ff6b6b, #ff8c42, #ffd700);
     z-index: 1;
     transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 0 10px rgba(255, 140, 66, 0.5);
@@ -611,7 +597,7 @@ section {
 }
 
 .status-step.completed .status-icon {
-    background: linear-gradient(135deg, #ff8c42, #ff8c42);
+    background: linear-gradient(135deg, #ff8c42, #ffd700);
     border-color: #ff8c42;
     box-shadow: 0 4px 20px rgba(255, 140, 66, 0.5);
     transform: scale(1.1);
@@ -635,9 +621,9 @@ section {
 }
 
 .status-step.published .status-icon {
-    background: linear-gradient(135deg, #ff8c42, #4ecdc4);
-    border-color: #ff8c42;
-    box-shadow: 0 4px 25px rgba(255, 140, 66, 0.6);
+    background: linear-gradient(135deg, #ffd700, #4ecdc4);
+    border-color: #ffd700;
+    box-shadow: 0 4px 25px rgba(255, 215, 0, 0.6);
     transform: scale(1.15);
 }
 
@@ -685,7 +671,7 @@ section {
 }
 
 .status-step.published .status-label {
-    color: #ff8c42;
+    color: #ffd700;
 }
 
 .status-details {
@@ -1006,7 +992,6 @@ section {
     height: 50px;
     border: 2px solid rgba(78, 205, 196, 0.3);
     background: rgba(10, 24, 33, 0.4);
-    backdrop-filter: blur(10px);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1085,7 +1070,6 @@ section {
 .filter-btn {
     padding: 0.7rem 1.5rem;
     background: rgba(10, 24, 33, 0.4);
-    backdrop-filter: blur(10px);
     border: 2px solid rgba(78, 205, 196, 0.2);
     border-radius: 50px;
     color: var(--text-light);
@@ -1118,28 +1102,42 @@ section {
     width: 100%;
 }
 
-/* Shared styles for news posts (both news page and home preview) */
-.news-post,
-.news-post-preview {
+.news-post {
     background: rgba(10, 24, 33, 0.5);
     border-radius: 12px;
     border: 1px solid rgba(78, 205, 196, 0.15);
     padding: 2rem;
     transition: all var(--transition-fast);
     backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
 }
 
-.news-post:hover,
-.news-post-preview:hover {
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.news-post:nth-child(1) { animation-delay: 0.05s; }
+.news-post:nth-child(2) { animation-delay: 0.1s; }
+.news-post:nth-child(3) { animation-delay: 0.15s; }
+.news-post:nth-child(4) { animation-delay: 0.2s; }
+.news-post:nth-child(5) { animation-delay: 0.25s; }
+.news-post:nth-child(6) { animation-delay: 0.3s; }
+
+.news-post:hover {
     transform: translateY(-5px);
     border-color: var(--secondary-teal);
     box-shadow: 0 15px 40px rgba(78, 205, 196, 0.2);
 }
 
-.news-post.highlight,
-.news-post-preview.highlight {
+.news-post.highlight {
     grid-column: span 2;
     background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(255, 140, 66, 0.1));
     border: 2px solid rgba(78, 205, 196, 0.3);
@@ -1147,8 +1145,7 @@ section {
     overflow: hidden;
 }
 
-.news-post.highlight::before,
-.news-post-preview.highlight::before {
+.news-post.highlight::before {
     content: '';
     position: absolute;
     top: 0;
@@ -1158,20 +1155,17 @@ section {
     background: linear-gradient(90deg, var(--secondary-teal), var(--primary-warm));
 }
 
-.news-post.highlight .post-title,
-.news-post-preview.highlight .post-title {
+.news-post.highlight .post-title {
     font-size: 1.8rem;
     color: var(--secondary-teal);
 }
 
-.news-post.highlight .post-excerpt,
-.news-post-preview.highlight .post-excerpt {
+.news-post.highlight .post-excerpt {
     font-size: 1.05rem;
     line-height: 1.8;
 }
 
-.news-post.highlight:hover,
-.news-post-preview.highlight:hover {
+.news-post.highlight:hover {
     border-color: var(--primary-warm);
     box-shadow: 0 20px 50px rgba(78, 205, 196, 0.3);
 }
@@ -1195,7 +1189,7 @@ section {
 }
 
 .post-category.event {
-    background: rgba(255, 140, 66, 0.15);
+    background: rgba(255, 215, 0, 0.15);
     color: var(--primary-gold);
 }
 
@@ -1229,20 +1223,6 @@ section {
     margin-bottom: 1.5rem;
 }
 
-.post-meta {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(78, 205, 196, 0.1);
-}
-
-.reading-time {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
 .post-link {
     display: inline-flex;
     align-items: center;
@@ -1252,7 +1232,6 @@ section {
     font-weight: 600;
     font-size: 0.9rem;
     transition: all var(--transition-fast);
-    margin-top: auto;
 }
 
 .post-link:hover {
@@ -1472,7 +1451,7 @@ footer {
 
     .nav-btn svg {
         width: 16px;
-        height: 16px;
+        height: 16px;   
     }
 
     .news-grid {
@@ -1525,15 +1504,6 @@ footer {
 
     .characters-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .news-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-
-    .news-post-preview.highlight {
-        grid-column: span 2;
     }
 }
 
@@ -1619,21 +1589,10 @@ footer {
 
     .news-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
     }
 
-    .news-post.highlight,
-    .news-post-preview.highlight {
+    .news-post.highlight {
         grid-column: span 1;
-    }
-
-    .news-post-preview.highlight .post-title {
-        font-size: 1.5rem;
-    }
-
-    .news-post,
-    .news-post-preview {
-        padding: 1.5rem;
     }
 
     .book-card {
@@ -1823,14 +1782,50 @@ footer {
     min-height: auto;
 }
 
-.featured-book-container {
+.featured-book-card {
     max-width: var(--container-max-width);
     margin: 0 auto;
-    position: relative;
-    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(250px, 0.4fr) 1fr;
+    gap: var(--content-gap);
+    background: rgba(10, 24, 33, 0.5);
+    padding: var(--content-gap);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(78, 205, 196, 0.2);
 }
 
-/* The book-card is already styled in the carousel section and will be reused */
+.featured-book-cover-container {
+    display: flex;
+    justify-content: center;
+}
+
+.featured-book-cover {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 2/3;
+    background: linear-gradient(135deg, rgba(26, 47, 63, 0.8), rgba(10, 24, 33, 0.8));
+    border: 2px solid var(--accent-dark-teal);
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    transition: all var(--transition-med);
+}
+
+.featured-book-cover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 40px 80px rgba(255, 140, 66, 0.2);
+}
+
+.featured-book-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 
 .book-status-tracker.compact {
     padding: 1rem;
@@ -1847,7 +1842,7 @@ footer {
 
 .progress-bar-fill {
     height: 100%;
-    background: linear-gradient(to right, #ff6b6b, #ff8c42, #ff8c42);
+    background: linear-gradient(to right, #ff6b6b, #ff8c42, #ffd700);
     border-radius: 10px;
     transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 0 10px rgba(255, 140, 66, 0.5);
@@ -1877,7 +1872,47 @@ footer {
 }
 
 /* About Preview Section */
-/* About preview styles removed - using full about section instead */
+.about-preview {
+    min-height: auto;
+}
+
+.about-preview-container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: var(--content-gap);
+    align-items: center;
+    background: rgba(10, 24, 33, 0.5);
+    padding: var(--content-gap);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(78, 205, 196, 0.2);
+}
+
+.about-preview-container .about-photo {
+    width: 250px;
+    height: 300px;
+}
+
+.about-preview-container .about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.about-preview-container h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--secondary-teal);
+    margin-bottom: 0;
+}
+
+.about-preview-container p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(232, 244, 248, 0.95);
+    margin: 0;
+}
 
 /* Latest News Section */
 .latest-news-section {
@@ -1892,7 +1927,27 @@ footer {
     gap: 2rem;
 }
 
-/* news-post-preview styles are now shared with news-post above */
+.news-post-preview {
+    background: rgba(10, 24, 33, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(78, 205, 196, 0.15);
+    padding: 2rem;
+    transition: all var(--transition-fast);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+}
+
+.news-post-preview:hover {
+    transform: translateY(-5px);
+    border-color: var(--secondary-teal);
+    box-shadow: 0 15px 40px rgba(78, 205, 196, 0.2);
+}
+
+.news-post-preview.highlight {
+    border: 2px solid rgba(78, 205, 196, 0.3);
+    background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(255, 140, 66, 0.05));
+}
 
 .news-cta {
     max-width: var(--container-max-width);
@@ -1970,12 +2025,9 @@ footer {
 
 /* Breadcrumb Navigation */
 .breadcrumb {
-    position: relative;
-    z-index: 3;
-    background: var(--bg-dark);
-    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
     padding: 1rem var(--section-padding-x);
-    margin-top: 70px; /* Space for fixed nav bar */
 }
 
 .breadcrumb ol {
@@ -1983,8 +2035,6 @@ footer {
     gap: 0.5rem;
     list-style: none;
     flex-wrap: wrap;
-    max-width: var(--container-max-width);
-    margin: 0 auto;
 }
 
 .breadcrumb-item {
@@ -2015,7 +2065,6 @@ footer {
 /* Book Card Preview (for grids) */
 .book-card-preview {
     background: rgba(10, 24, 33, 0.5);
-    backdrop-filter: blur(10px);
     border-radius: 12px;
     border: 1px solid rgba(78, 205, 196, 0.15);
     transition: all var(--transition-fast);
@@ -2120,7 +2169,7 @@ footer {
 }
 
 .status-badge.status-published {
-    background: rgba(255, 140, 66, 0.15);
+    background: rgba(255, 215, 0, 0.15);
     color: var(--primary-gold);
 }
 
@@ -2137,6 +2186,15 @@ footer {
 
     .featured-book-cover {
         max-width: 250px;
+        margin: 0 auto;
+    }
+
+    .about-preview-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .about-preview-container .about-photo {
         margin: 0 auto;
     }
 
@@ -2253,18 +2311,17 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(10, 24, 33, 0.5), rgba(26, 47, 63, 0.5));
+    background: linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(30, 20, 40, 0.95));
     position: relative;
     overflow: hidden;
     padding: var(--section-spacing) var(--section-padding-x);
-    backdrop-filter: blur(10px);
 }
 
 .series-hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(78, 205, 196, 0.1) 0%, transparent 50%);
+    background: radial-gradient(circle at 30% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -2282,7 +2339,7 @@ footer {
     font-size: clamp(2.5rem, 6vw, 4rem);
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #ff8c42, #ffb366);
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -2329,7 +2386,7 @@ footer {
 .stat-value {
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 700;
-    color: #ff8c42;
+    color: #ffd700;
 }
 
 .stat-label {
@@ -2376,17 +2433,16 @@ footer {
 }
 
 .series-overview-card {
-    background: rgba(10, 24, 33, 0.3);
-    border: 1px solid rgba(78, 205, 196, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
     padding: 2rem;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
 }
 
 .series-overview-card:hover {
-    background: rgba(10, 24, 33, 0.5);
-    border-color: rgba(78, 205, 196, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 215, 0, 0.3);
     transform: translateY(-5px);
 }
 
@@ -2400,7 +2456,7 @@ footer {
 .overview-card-header svg {
     width: 32px;
     height: 32px;
-    color: #ff8c42;
+    color: #ffd700;
 }
 
 .overview-card-header h3 {
@@ -2426,7 +2482,7 @@ footer {
 
 .theme-list li::before {
     content: '→';
-    color: #ff8c42;
+    color: #ffd700;
     margin-right: 1rem;
     font-weight: bold;
 }
@@ -2466,18 +2522,17 @@ footer {
 }
 
 .series-book-card {
-    background: rgba(10, 24, 33, 0.3);
-    border: 1px solid rgba(78, 205, 196, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
     overflow: hidden;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
 }
 
 .series-book-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(78, 205, 196, 0.3);
-    box-shadow: 0 10px 30px rgba(78, 205, 196, 0.2);
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .book-cover-container {
@@ -2502,13 +2557,13 @@ footer {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 30%, rgba(255, 140, 66, 0.2) 0%, transparent 60%);
+    background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.2) 0%, transparent 60%);
 }
 
 .book-cover-icon {
     width: 80px;
     height: 80px;
-    color: rgba(255, 140, 66, 0.5);
+    color: rgba(255, 215, 0, 0.5);
     margin-bottom: 1rem;
     z-index: 1;
 }
@@ -2516,7 +2571,7 @@ footer {
 .book-number {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #ff8c42;
+    color: #ffd700;
     z-index: 1;
 }
 
@@ -2525,7 +2580,7 @@ footer {
 }
 
 .series-badge {
-    background: linear-gradient(135deg, #ff8c42, #ffb366);
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
     color: #0a0a0f;
     font-weight: 600;
 }
@@ -2564,7 +2619,7 @@ footer {
 .progress-mini-percentage {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #ff8c42;
+    color: #ffd700;
 }
 
 .progress-bar-mini {
@@ -2576,7 +2631,7 @@ footer {
 
 .progress-bar-mini-fill {
     height: 100%;
-    background: linear-gradient(90deg, #ff8c42, #ffb366);
+    background: linear-gradient(90deg, #ffd700, #ffed4e);
     border-radius: 3px;
     transition: width 0.5s ease;
 }
@@ -2660,16 +2715,15 @@ footer {
 /* Book Hero Section */
 .book-hero {
     padding: var(--section-spacing) var(--section-padding-x);
-    background: linear-gradient(135deg, rgba(10, 24, 33, 0.5), rgba(26, 47, 63, 0.5));
+    background: linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(30, 20, 40, 0.95));
     position: relative;
-    backdrop-filter: blur(10px);
 }
 
 .book-hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 70% 50%, rgba(78, 205, 196, 0.1) 0%, transparent 60%);
+    background: radial-gradient(circle at 70% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 60%);
     pointer-events: none;
 }
 
@@ -2707,13 +2761,13 @@ footer {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 30%, rgba(255, 140, 66, 0.2) 0%, transparent 70%);
+    background: radial-gradient(circle at 50% 30%, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
 }
 
 .book-cover-icon-large {
     width: 120px;
     height: 120px;
-    color: rgba(255, 140, 66, 0.5);
+    color: rgba(255, 215, 0, 0.5);
     z-index: 1;
 }
 
@@ -2733,7 +2787,7 @@ footer {
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
     margin: 0;
-    background: linear-gradient(135deg, #ff8c42, #ffb366);
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -2761,7 +2815,7 @@ footer {
 .meta-item svg {
     width: 20px;
     height: 20px;
-    color: #ff8c42;
+    color: #ffd700;
 }
 
 .book-hero-actions {
@@ -2812,8 +2866,8 @@ footer {
 }
 
 .tab-btn.active {
-    color: #ff8c42;
-    border-bottom-color: #ff8c42;
+    color: #ffd700;
+    border-bottom-color: #ffd700;
 }
 
 .tab-content {
@@ -2861,17 +2915,16 @@ footer {
 }
 
 .overview-card {
-    background: rgba(10, 24, 33, 0.3);
-    border: 1px solid rgba(78, 205, 196, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
     padding: 2rem;
-    backdrop-filter: blur(10px);
 }
 
 .overview-card h3 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
-    color: #ff8c42;
+    color: #ffd700;
 }
 
 .theme-tags {
@@ -2885,8 +2938,8 @@ footer {
 
 .theme-tags li {
     padding: 0.5rem 1rem;
-    background: rgba(255, 140, 66, 0.1);
-    border: 1px solid rgba(255, 140, 66, 0.3);
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
     border-radius: 2rem;
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.8);
@@ -2909,7 +2962,7 @@ footer {
 }
 
 .detail-list strong {
-    color: #ff8c42;
+    color: #ffd700;
     margin-right: 0.5rem;
 }
 
@@ -2919,7 +2972,6 @@ footer {
     border-radius: 1rem;
     padding: 2rem;
     margin-top: 2rem;
-    backdrop-filter: blur(10px);
 }
 
 .content-warnings-section h3 {
@@ -2967,26 +3019,24 @@ footer {
 }
 
 .character-card {
-    background: rgba(10, 24, 33, 0.3);
-    border: 1px solid rgba(78, 205, 196, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
     padding: 2rem;
     text-align: center;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
 }
 
 .character-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(78, 205, 196, 0.3);
-    box-shadow: 0 10px 30px rgba(78, 205, 196, 0.15);
+    border-color: rgba(255, 215, 0, 0.3);
 }
 
 .character-icon {
     width: 80px;
     height: 80px;
     margin: 0 auto 1.5rem auto;
-    background: linear-gradient(135deg, rgba(255, 140, 66, 0.2), rgba(255, 140, 66, 0.1));
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -2996,13 +3046,13 @@ footer {
 .character-icon svg {
     width: 40px;
     height: 40px;
-    color: #ff8c42;
+    color: #ffd700;
 }
 
 .character-name {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    color: #ff8c42;
+    color: #ffd700;
 }
 
 .character-role {
@@ -3041,12 +3091,11 @@ footer {
 }
 
 .sample-text {
-    background: rgba(10, 24, 33, 0.3);
-    border: 1px solid rgba(78, 205, 196, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
     padding: 3rem;
     margin-bottom: 3rem;
-    backdrop-filter: blur(10px);
 }
 
 .sample-text p {
@@ -3066,7 +3115,7 @@ footer {
     float: left;
     line-height: 0.85;
     margin: 0.1em 0.1em 0 0;
-    color: #ff8c42;
+    color: #ffd700;
 }
 
 .sample-cta {
@@ -3108,27 +3157,25 @@ footer {
 }
 
 .progress-stat-card {
-    background: rgba(10, 24, 33, 0.3);
-    border: 1px solid rgba(78, 205, 196, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
     padding: 2rem;
     display: flex;
     align-items: center;
     gap: 1.5rem;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
 }
 
 .progress-stat-card:hover {
-    border-color: rgba(78, 205, 196, 0.3);
+    border-color: rgba(255, 215, 0, 0.3);
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(78, 205, 196, 0.1);
 }
 
 .stat-icon {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, rgba(255, 140, 66, 0.2), rgba(255, 140, 66, 0.1));
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
     border-radius: 1rem;
     display: flex;
     align-items: center;
@@ -3139,12 +3186,12 @@ footer {
 .stat-icon svg {
     width: 30px;
     height: 30px;
-    color: #ff8c42;
+    color: #ffd700;
 }
 
 .stat-info h3 {
     font-size: 1.8rem;
-    color: #ff8c42;
+    color: #ffd700;
     margin: 0 0 0.25rem 0;
 }
 
@@ -3176,7 +3223,7 @@ footer {
     top: 0;
     bottom: 0;
     width: 3px;
-    background: linear-gradient(to bottom, #ff8c42, rgba(255, 140, 66, 0.3));
+    background: linear-gradient(to bottom, #ffd700, rgba(255, 215, 0, 0.3));
 }
 
 .timeline-item {
@@ -3196,8 +3243,8 @@ footer {
 }
 
 .timeline-item.completed .timeline-marker {
-    background: #ff8c42;
-    border-color: #ff8c42;
+    background: #ffd700;
+    border-color: #ffd700;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3210,17 +3257,17 @@ footer {
 }
 
 .timeline-item.current .timeline-marker {
-    background: #ff8c42;
-    border-color: #ff8c42;
+    background: #ffd700;
+    border-color: #ffd700;
     animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
     0%, 100% {
-        box-shadow: 0 0 0 0 rgba(255, 140, 66, 0.7);
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
     }
     50% {
-        box-shadow: 0 0 0 10px rgba(255, 140, 66, 0);
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
     }
 }
 
@@ -3231,7 +3278,7 @@ footer {
 }
 
 .timeline-item.current .timeline-content h4 {
-    color: #ff8c42;
+    color: #ffd700;
 }
 
 .stage-progress {
@@ -3255,14 +3302,14 @@ footer {
 }
 
 .updates-cta a {
-    color: #ff8c42;
+    color: #ffd700;
     text-decoration: none;
-    border-bottom: 1px solid rgba(255, 140, 66, 0.3);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
     transition: border-color 0.3s ease;
 }
 
 .updates-cta a:hover {
-    border-bottom-color: #ff8c42;
+    border-bottom-color: #ffd700;
 }
 
 /* No Content State */
