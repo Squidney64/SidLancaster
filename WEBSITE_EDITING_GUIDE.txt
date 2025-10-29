@@ -1,0 +1,644 @@
+================================================================================
+    HOW TO MANUALLY CREATE AND UPDATE BOOK & SERIES PAGES
+    Sid Lancaster Author Website - Editing Guide
+================================================================================
+
+TABLE OF CONTENTS
+-----------------
+1. System Architecture Overview
+2. Adding/Updating Book Data
+3. Adding/Updating Series Data
+4. Creating New HTML Pages
+5. Updating Navigation
+6. Quick Reference Guide
+7. Important Notes & Best Practices
+
+
+================================================================================
+1. SYSTEM ARCHITECTURE OVERVIEW
+================================================================================
+
+Your website uses a CENTRALIZED DATA SYSTEM:
+
+┌─────────────┐
+│   data.js   │  ← All book/series information stored here
+└──────┬──────┘
+       │
+       ├──→ JavaScript files read this data
+       │
+       └──→ HTML pages display the data automatically
+
+
+KEY FILES YOU'LL WORK WITH:
+---------------------------
+• data.js                    - Central database (edit this for content)
+• books/*.html              - Individual book pages (rarely edited)
+• series/*.html             - Individual series pages (rarely edited)
+• All HTML files            - Update navigation when adding new books/series
+
+
+HOW IT WORKS:
+-------------
+1. You add/update data in data.js
+2. JavaScript automatically reads the data
+3. HTML pages display everything beautifully
+4. No need to edit HTML for content changes!
+
+
+================================================================================
+2. ADDING/UPDATING BOOK DATA
+================================================================================
+
+LOCATION: Edit the "booksData" object in data.js
+
+
+BASIC STRUCTURE:
+----------------
+const booksData = {
+    'your-book-slug': {        // ← Use kebab-case (lowercase-with-hyphens)
+
+        // === REQUIRED FIELDS ===
+        id: 2,                 // Unique number for each book
+        slug: 'your-book-slug', // Must match the key above
+        title: "Your Book Title",
+        series: "series-slug",  // Links to series, or null for standalone
+        seriesName: "Series Name",
+        seriesNumber: "Book 2 of 4",
+
+        // === PUBLICATION INFO ===
+        currentStage: "Drafting",
+        // Options: "Prewriting", "Drafting", "Revising", "Editing",
+        //          "Publishing", "Published"
+
+        stageProgress: 31,      // Percentage (0-100)
+        wordCount: 56000,
+        targetWordCount: 200000,
+        published: false,       // Change to true when book is released
+        releaseEstimate: "Late 2026",
+        estimatedPages: 650,
+
+        // === BOOK DETAILS ===
+        genre: ["Epic Fantasy", "Political Fantasy", "Dark Fantasy"],
+        subgenres: ["Political Fantasy", "Dark Fantasy"],
+        pov: "Multiple Viewpoints - 3rd Person Limited",
+        povStyle: "Multiple Viewpoints - 3rd Person Limited",
+        targetAudience: "Adult & Young Adult",
+        setting: "A Mesoamerican-Roman Empire",
+        status: "Drafting",
+
+        // === MARKETING ===
+        tagline: "Short catchy tagline for marketing",
+
+        synopsis: "One paragraph summary for quick reference",
+
+        extendedSynopsis: "Longer detailed summary that appears on book page...",
+
+        themes: [
+            "Rising from servitude",
+            "Friendship and betrayal",
+            "The cost of power",
+            "Challenging destiny"
+        ],
+
+        // === CONTENT WARNINGS ===
+        contentWarnings: ["Violence", "Slavery"],
+
+        contentWarningsDesc: [
+            "Description of first warning with details",
+            "Description of second warning with details"
+        ],
+
+        detailedContentWarnings: {
+            violence: {
+                level: "Moderate to High",
+                description: "Detailed description of violence content",
+                spoilerFree: true
+            },
+            // Add more detailed warnings as needed
+        },
+
+        // === CHARACTERS ===
+        mainCharacters: [
+            {
+                name: "Character Name",
+                role: "Protagonist • Palace Slave",
+                description: "Full character description...",
+                traits: ["Trait1", "Trait2", "Trait3", "Trait4"]
+                // Always provide exactly 4 traits
+            },
+            {
+                name: "Second Character",
+                role: "Deuteragonist • Description",
+                description: "Another character description...",
+                traits: ["Trait1", "Trait2", "Trait3", "Trait4"]
+            }
+            // Add 2-6 main characters
+        ],
+
+        // === SAMPLE CHAPTER ===
+        sampleChapter: [
+            "First paragraph of your sample chapter...",
+            "Second paragraph...",
+            "Third paragraph...",
+            "Continue with more paragraphs..."
+        ],
+        // Each paragraph is a separate string in the array
+
+        // === EXTRAS (OPTIONAL) ===
+        extras: {
+            playlist: null,         // Spotify/Apple Music link
+            pinterest: null,        // Pinterest board link
+            inspiration: [],
+            moodBoard: null,
+            characterArt: [],
+            maps: [],
+            deletedScenes: []
+        },
+
+        // === PURCHASE LINKS (For when published) ===
+        purchaseLinks: {
+            amazon: '#',
+            barnesNoble: '#',
+            bookshop: '#',
+            goodreads: '#',
+            storyGraph: '#'
+        },
+
+        // === METADATA ===
+        isbn: null,
+        publisher: 'Self-Published',
+        language: 'English',
+        lastUpdated: "2025-01-15",
+
+        // === PROGRESS TIMELINE ===
+        progressMilestones: {
+            'Prewriting': {
+                completed: true,
+                date: '2024-08',
+                description: 'Completed world-building and detailed outline',
+                notes: 'Extra notes about this stage'
+            },
+            'Drafting': {
+                completed: false,
+                startDate: '2024-09',
+                description: 'Currently writing the first draft',
+                notes: 'Progress notes',
+                currentFocus: 'Act 2 - Palace conspiracy'
+            },
+            'Revising': {
+                completed: false,
+                description: 'Major structural changes and plot refinement',
+                estimatedStart: '2025-06'
+            },
+            'Editing': {
+                completed: false,
+                description: 'Line editing and prose polishing',
+                estimatedStart: '2025-10'
+            },
+            'Publishing': {
+                completed: false,
+                description: 'Cover design, formatting, marketing prep',
+                estimatedStart: '2026-03'
+            },
+            'Published': {
+                completed: false,
+                description: 'Book release and promotion',
+                estimatedDate: 'Late 2026'
+            }
+        }
+    }
+};
+
+
+WHAT YOU CAN EDIT:
+------------------
+✓ Writing Progress: wordCount, stageProgress, currentStage
+✓ Status Updates: status, milestone completion dates
+✓ Content: synopsis, themes, mainCharacters, sampleChapter
+✓ Timeline: progressMilestones with dates and notes
+✓ Publication: releaseDate, isbn, purchase links (when published)
+✓ Marketing: tagline, extended synopsis
+✓ Characters: Add/edit character descriptions and traits
+
+
+================================================================================
+3. ADDING/UPDATING SERIES DATA
+================================================================================
+
+LOCATION: Edit the "seriesData" object in data.js
+
+
+BASIC STRUCTURE:
+----------------
+const seriesData = {
+    'your-series-slug': {
+
+        // === REQUIRED FIELDS ===
+        id: 'your-series-slug',
+        name: 'Series Name',
+        slug: 'your-series-slug',
+        tagline: 'Compelling tagline that describes the series',
+        bookCount: 1,           // Current number of books
+        plannedBooks: 4,        // Total planned books
+        publishedBooks: 0,      // Number of published books
+        status: 'Active',       // Options: "Active", "Complete", "Planned"
+        genre: 'Epic Fantasy',
+
+        // === DESCRIPTION ===
+        description: 'Full series description that appears on the series page...',
+
+        // === THEMES ===
+        themes: [
+            'Power and Servitude',
+            'Freedom and Destiny',
+            'Empire and Rebellion',
+            'Ancient Magic and Forgotten Gods',
+            'Cosmic Horror',
+            'Found Family and Betrayal'
+        ],
+
+        // === WORLD BUILDING ===
+        worldBuilding: 'Detailed description of the world, its cultures, ' +
+                       'history, and unique features...',
+
+        worldSetting: 'Brief one-line summary of setting',
+
+        // === CONTENT WARNINGS ===
+        contentWarnings: [
+            'Violence and war',
+            'Slavery and systemic oppression',
+            'Death and loss',
+            'Political intrigue and manipulation'
+        ],
+
+        // === READING ORDER ===
+        readingOrder: 'chronological',
+        // Options: "chronological" or "standalone"
+
+        // === BOOKS IN SERIES ===
+        books: [
+            'book-slug-1',
+            'book-slug-2',
+            'book-slug-3'
+        ],
+        // Add book slugs in reading order
+
+        // === OPTIONAL FIELDS ===
+        featuredArt: null,      // Link to series banner/art
+        worldMap: null,         // Link to world map image
+
+        commonCharacters: [
+            'Various POV characters across books',
+            'Interconnected storylines'
+        ],
+
+        magicSystem: 'Description of how magic works in this world...',
+
+        resources: {
+            discussionForum: '#',
+            bookClub: '#',
+            fanArt: '#'
+        }
+    }
+};
+
+
+WHAT YOU CAN EDIT:
+------------------
+✓ Progress: bookCount, publishedBooks
+✓ Content: description, themes, worldBuilding, magicSystem
+✓ Books: Add new book slugs to the books array
+✓ Status: Change from "Active" to "Complete" when finished
+✓ Resources: Add links to forums, book clubs, etc.
+
+
+================================================================================
+4. CREATING NEW HTML PAGES
+================================================================================
+
+FOR A NEW BOOK PAGE:
+--------------------
+1. Copy the template file:
+   books/the-day-when-servants-reign.html
+
+2. Rename it to match your book slug:
+   books/your-book-slug.html
+
+3. Edit ONLY these lines in the <head> section:
+
+   <title>Your Book Title - Book X of Series Name</title>
+   <meta name="description" content="Your book description here">
+
+4. That's it! JavaScript loads everything else from data.js
+
+
+FOR A NEW SERIES PAGE:
+----------------------
+1. Copy the template file:
+   series/severance-chronicles.html
+
+2. Rename it to match your series slug:
+   series/your-series-slug.html
+
+3. Edit these sections:
+
+   A. In <head>:
+      <title>Your Series Name - Genre by Sid Lancaster</title>
+      <meta name="description" content="Your series description">
+
+   B. In the hero section header:
+      <div class="section-header">
+          <h2>Your Series Name</h2>
+      </div>
+
+   C. In the breadcrumb:
+      <li class="breadcrumb-item active">Your Series Name</li>
+
+4. Done! JavaScript handles the rest
+
+
+================================================================================
+5. UPDATING NAVIGATION
+================================================================================
+
+WHEN TO UPDATE NAVIGATION:
+--------------------------
+• When you add a new book
+• When you add a new series
+• When you want to feature a specific book/series in the dropdown
+
+
+FILES THAT NEED NAVIGATION UPDATES:
+-----------------------------------
+✓ index.html
+✓ news.html
+✓ books.html
+✓ series.html
+✓ books/the-day-when-servants-reign.html
+✓ series/severance-chronicles.html
+✓ Any other book/series pages you create
+
+
+HOW TO ADD TO DROPDOWN MENUS:
+------------------------------
+
+Find the <nav> section and locate the dropdown menus:
+
+FOR BOOKS:
+----------
+<ul class="dropdown-menu">
+    <li><a href="books.html">All Books</a></li>
+    <li class="divider"></li>
+    <li><a href="books/the-day-when-servants-reign.html">The Day When Servants Reign</a></li>
+    <li><a href="books/your-new-book.html">Your New Book Title</a></li> ← ADD THIS LINE
+</ul>
+
+FOR SERIES:
+-----------
+<ul class="dropdown-menu">
+    <li><a href="series.html">All Series</a></li>
+    <li class="divider"></li>
+    <li><a href="series/severance-chronicles.html">Severance Chronicles</a></li>
+    <li><a href="series/your-new-series.html">Your New Series</a></li> ← ADD THIS LINE
+</ul
+
+
+PATH ADJUSTMENTS:
+-----------------
+• From root files (index.html, news.html): Use "books/book-name.html"
+• From books/ folder: Use "../index.html" to go back to root
+• From series/ folder: Use "../index.html" to go back to root
+
+
+================================================================================
+6. QUICK REFERENCE GUIDE
+================================================================================
+
+DAILY WRITING UPDATES:
+----------------------
+File: data.js
+Edit: wordCount, stageProgress, currentFocus in progressMilestones
+
+Example:
+    wordCount: 58000,          // Update word count
+    stageProgress: 33,         // Update percentage
+    currentFocus: 'Act 2 - New scene'  // Update what you're working on
+
+
+CHANGING BOOK INFORMATION:
+--------------------------
+File: data.js
+Edit: Any field in booksData (synopsis, characters, themes, etc.)
+
+
+ADDING SAMPLE CHAPTERS:
+-----------------------
+File: data.js
+Edit: sampleChapter array
+
+Example:
+    sampleChapter: [
+        "Paragraph one...",
+        "Paragraph two...",
+        "Paragraph three..."
+    ],
+
+
+UPDATING WRITING STATUS:
+------------------------
+File: data.js
+Edit: currentStage and progressMilestones
+
+Example:
+    currentStage: "Revising",  // Changed from "Drafting"
+
+    progressMilestones: {
+        'Drafting': {
+            completed: true,   // Mark as complete
+            date: '2025-06',   // Add completion date
+            // ...
+        },
+        'Revising': {
+            completed: false,
+            startDate: '2025-06',  // Add start date
+            // ...
+        }
+    }
+
+
+ADDING A NEW BOOK (COMPLETE CHECKLIST):
+----------------------------------------
+□ Step 1: Add book object to data.js → booksData
+□ Step 2: Create HTML file: books/your-book-slug.html
+□ Step 3: Add book slug to series' books array in data.js
+□ Step 4: Update navigation in ALL HTML files:
+    □ index.html
+    □ news.html
+    □ books.html
+    □ series.html
+    □ All book pages
+    □ All series pages
+
+
+ADDING A NEW SERIES (COMPLETE CHECKLIST):
+------------------------------------------
+□ Step 1: Add series object to data.js → seriesData
+□ Step 2: Create HTML file: series/your-series-slug.html
+□ Step 3: Update navigation in ALL HTML files (same list as above)
+
+
+================================================================================
+7. IMPORTANT NOTES & BEST PRACTICES
+================================================================================
+
+SLUG NAMING RULES:
+------------------
+✓ Use kebab-case (lowercase with hyphens)
+✓ No spaces, no underscores, no capital letters
+✓ The slug MUST match in three places:
+    1. The key in booksData/seriesData
+    2. The slug field inside the object
+    3. The HTML filename
+
+CORRECT:
+    'the-day-when-servants-reign': {
+        slug: 'the-day-when-servants-reign',
+    }
+    File: books/the-day-when-servants-reign.html
+
+INCORRECT:
+    'The Day When Servants Reign'        ❌ Capital letters
+    'the_day_when_servants_reign'        ❌ Underscores
+    'the day when servants reign'        ❌ Spaces
+
+
+DATA TYPE RULES:
+----------------
+Arrays (use square brackets):
+    themes: ["Theme 1", "Theme 2", "Theme 3"]           ✓ Correct
+    themes: "Theme 1, Theme 2, Theme 3"                 ✗ Wrong
+
+Numbers (no quotes):
+    wordCount: 56000                                    ✓ Correct
+    wordCount: "56000"                                  ✗ Wrong
+
+Booleans (no quotes):
+    published: false                                    ✓ Correct
+    published: "false"                                  ✗ Wrong
+
+Strings (use quotes):
+    title: "The Day When Servants Reign"               ✓ Correct
+    title: The Day When Servants Reign                 ✗ Wrong
+
+
+CHARACTER REQUIREMENTS:
+-----------------------
+• Always provide exactly 4 traits per character
+• Each character needs: name, role, description, traits array
+• Minimum 1 character, recommended 2-6 main characters
+
+
+SAMPLE CHAPTER FORMAT:
+----------------------
+• Each paragraph is a separate string in the array
+• Use double quotes for strings
+• Escape single quotes inside text with backslash: \'
+  Example: "He didn\'t know what to do"
+
+
+PROGRESS MILESTONES:
+--------------------
+Use these exact stage names (case-sensitive):
+    • Prewriting
+    • Drafting
+    • Revising
+    • Editing
+    • Publishing
+    • Published
+
+Mark completed stages with:
+    completed: true,
+    date: '2024-08',
+
+
+KEEPING THINGS ORGANIZED:
+--------------------------
+□ Update data.js regularly with writing progress
+□ Keep content warnings accurate and up-to-date
+□ Use consistent formatting (tabs, spacing)
+□ Test changes by viewing pages in a browser
+□ Back up data.js before making major changes
+□ Update lastUpdated field when making changes
+
+
+TESTING YOUR CHANGES:
+----------------------
+1. Save data.js after editing
+2. Open the HTML page in a web browser
+3. Check that all data displays correctly
+4. Test on mobile view (resize browser window)
+5. Check navigation dropdowns work
+
+
+COMMON MISTAKES TO AVOID:
+--------------------------
+✗ Forgetting to add comma after object properties
+✗ Using single quotes inside double-quoted strings without escape
+✗ Misspelling stage names in progressMilestones
+✗ Forgetting to update navigation after adding books/series
+✗ Using wrong path separator (use / not \)
+✗ Not providing exactly 4 traits for characters
+
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+BOOK/SERIES NOT SHOWING UP:
+----------------------------
+→ Check that slug matches in all three places (key, slug field, filename)
+→ Verify data.js doesn't have syntax errors (missing commas, quotes)
+→ Make sure the HTML file exists in correct folder
+→ Check browser console for JavaScript errors (F12)
+
+
+NAVIGATION LINKS BROKEN:
+-------------------------
+→ Verify file paths are correct (use ../ to go up one directory)
+→ Check filename matches exactly (case-sensitive)
+→ Ensure .html extension is included
+
+
+DATA NOT UPDATING:
+------------------
+→ Hard refresh browser: Ctrl+F5 (Windows) or Cmd+Shift+R (Mac)
+→ Check that you saved data.js after editing
+→ Verify no JavaScript syntax errors in data.js
+
+
+FORMATTING LOOKS WRONG:
+-----------------------
+→ Check that you didn't accidentally edit styles.css
+→ Verify HTML structure matches template files
+→ Test in different browser to rule out caching issues
+
+
+================================================================================
+NEED MORE HELP?
+================================================================================
+
+Your website is designed so you ONLY need to edit data.js for content updates.
+The HTML pages are templates that automatically display the data.
+
+Remember:
+1. Edit data.js for ALL content changes
+2. Only create new HTML files when adding entirely new books/series
+3. Update navigation when you add new books/series
+4. Everything else updates automatically!
+
+
+Happy writing! 📚✨
+
+================================================================================
+End of Guide
+================================================================================
