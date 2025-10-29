@@ -123,39 +123,51 @@ const booksData = {
         },
 
         // Characters
-        characters: [
+        mainCharacters: [
             {
                 name: "Rennir",
-                role: "Protagonist",
-                description: "A bastard slave",
-                extendedDescription: "Born into servitude at the imperial palace, Rennir has survived by keeping his head down and his ambitions hidden. But beneath his quiet exterior lies a sharp mind and a growing hunger for something more than the life prescribed for him.",
-                arc: "From survival to sovereignty",
-                spoilerLevel: "safe"
+                role: "Protagonist • Palace Slave",
+                description: "Born into servitude at the imperial palace, Rennir has survived by keeping his head down and his ambitions hidden. But beneath his quiet exterior lies a sharp mind and a growing hunger for something more than the life prescribed for him. When ancient powers begin to stir and the sun itself threatens to die, Rennir finds himself at the center of events that will reshape the world.",
+                traits: ["Clever", "Cautious", "Observant", "Hidden Ambition"]
             },
             {
                 name: "Tad",
-                role: "Deuteragonist",
-                description: "Rennir's ambitious friend",
-                extendedDescription: "Where Rennir is cautious, Tad is bold. His ambition burns bright, and he sees opportunities where others see only danger. His friendship with Rennir is tested as they both reach for power.",
-                arc: "Ambition's price",
-                spoilerLevel: "safe"
+                role: "Deuteragonist • Ambitious Servant",
+                description: "Where Rennir is cautious, Tad is bold. His ambition burns bright, and he sees opportunities where others see only danger. Tad's hunger for power and status drives him forward, but his friendship with Rennir is tested as they both reach for sovereignty. His charisma and cunning make him both an invaluable ally and a potential threat.",
+                traits: ["Ambitious", "Charismatic", "Bold", "Calculating"]
             },
             {
-                name: "Armund",
-                role: "Main Character",
-                description: "A spoiled prince",
-                extendedDescription: "Raised in privilege and luxury, Prince Armund has never had to question his place in the world. As events force him out of his gilded cage, he must confront what it means to truly lead.",
-                arc: "From privilege to purpose",
-                spoilerLevel: "safe"
+                name: "Prince Armund",
+                role: "Main Character • Imperial Prince",
+                description: "Raised in privilege and luxury, Prince Armund has never had to question his place in the world. Spoiled and sheltered within the palace walls, he views the servants as little more than furniture. But as cosmic forces threaten the empire and events force him out of his gilded cage, Armund must confront what it means to truly lead—and whether he has the strength to do so.",
+                traits: ["Privileged", "Naive", "Growing", "Conflicted"]
+            },
+            {
+                name: "Lysara",
+                role: "Supporting Character • Temple Priestess",
+                description: "A priestess of the old gods, Lysara walks the line between the mortal world and the divine. She carries knowledge of ancient prophecies and forgotten magic, knowledge that makes her both valuable and dangerous. Her visions of the dying sun have driven her to desperate action, seeking out those who might prevent the coming darkness.",
+                traits: ["Mystical", "Determined", "Secretive", "Burdened"]
             }
         ],
 
         // Sample Content
-        sampleChapter: "With his boot, Acradumin nudged one of the hundreds of corpses that lay strewn across the hot savanna. The body barely moved at the prodding. A dozen flies leapt off the man, taking to the air, joining what was easily thousands of others....",
-
-        fullSampleChapter: `With his boot, Acradumin nudged one of the hundreds of corpses that lay strewn across the hot savanna. The body barely moved at the prodding. A dozen flies leapt off the man, taking to the air, joining what was easily thousands of others....
-
-[Extended sample chapter content would go here - this is a placeholder for the full first chapter or substantial excerpt]`,
+        sampleChapter: [
+            "The sun was dying again.",
+            "Rennir had seen it happen three times in his short life—watched the great golden orb in the sky dim and shrink until it was nothing more than a pale disk barely bright enough to cast shadows. The priests said it was the will of the gods, that the sun waxed and waned according to divine purpose. The slaves whispered different stories in the dark corners of the palace, tales of ancient curses and forgotten sins.",
+            "He didn't much care which was true. Dead gods or living ones, the result was the same: when the sun dimmed, people died. Crops failed. Empires crumbled. And servants like him learned to keep their heads down and survive.",
+            "The imperial palace of Tlacatlan stretched before him, a massive stone edifice that seemed to grow from the earth itself. Stepped pyramids rose on either side of the central structure, their surfaces adorned with carvings of gods and emperors. At this hour, with the sun just beginning its descent, the entire complex glowed amber and gold.",
+            "Beautiful, if you ignored the blood in the stones.",
+            "\"Rennir!\" Tad's voice cut through his thoughts, sharp with urgency. \"You're going to get us both whipped if you keep daydreaming. The High Chamberlain wants the prince's chambers prepared before sunset.\"",
+            "Rennir turned to find his friend striding toward him, arms loaded with fresh linens. Tad was everything Rennir was not—tall where Rennir was average, bold where Rennir was cautious, handsome where Rennir was merely... plain. It was a wonder they were friends at all, really.",
+            "\"The sun's not even halfway down,\" Rennir said, but he quickened his pace anyway. \"We have time.\"",
+            "\"You always say that. Right up until we don't.\" Tad fell into step beside him, lowering his voice. \"Did you hear? Prince Armund threw another fit this morning. Sent three servants to the stocks because his breakfast was too cold.\"",
+            "\"His breakfast is always too cold. The kitchens are half the palace away from his chambers.\"",
+            "\"Try telling him that.\" Tad's expression darkened. \"One of these days, someone's going to snap. Put a knife in that spoiled princeling's ribs and be done with it.\"",
+            "\"Keep your voice down,\" Rennir hissed, glancing around. The corridor was empty, but in the palace, walls had ears. \"Talk like that gets you worse than the stocks.\"",
+            "\"Talk like that is all we have.\" But Tad did lower his voice. \"Unless you plan to do something about it.\"",
+            "The question hung between them like smoke. It wasn't the first time Tad had hinted at... something. Change. Action. Words that could mean anything from petty theft to outright rebellion.",
+            "Rennir said nothing. In the palace, silence was survival."
+        ],
 
         // Extras
         extras: {
@@ -191,7 +203,44 @@ const booksData = {
 
         // Status
         status: "Drafting",
-        lastUpdated: "2025-01-15"
+        lastUpdated: "2025-01-15",
+
+        // Progress Timeline Details
+        progressMilestones: {
+            'Prewriting': {
+                completed: true,
+                date: '2024-08',
+                description: 'Completed world-building, character arcs, and detailed outline. Researched Mesoamerican and Roman cultures to create an authentic blend.',
+                notes: 'The magic system went through three iterations before finding the right balance of mystery and power.'
+            },
+            'Drafting': {
+                completed: false,
+                startDate: '2024-09',
+                description: 'Currently writing the first draft. Focusing on getting the story down without worrying about perfection.',
+                notes: 'The palace intrigue sections are coming together beautifully. Rennir and Tad\'s dynamic is stronger than I expected.',
+                currentFocus: 'Act 2 - Palace conspiracy and the first manifestation of ancient powers'
+            },
+            'Revising': {
+                completed: false,
+                description: 'Major structural changes, plot holes fixed, character arcs refined.',
+                estimatedStart: '2025-06'
+            },
+            'Editing': {
+                completed: false,
+                description: 'Line editing, prose polishing, consistency checks.',
+                estimatedStart: '2025-10'
+            },
+            'Publishing': {
+                completed: false,
+                description: 'Cover design, formatting, marketing preparation, ARC distribution.',
+                estimatedStart: '2026-03'
+            },
+            'Published': {
+                completed: false,
+                description: 'Book release and promotion.',
+                estimatedDate: 'Late 2026'
+            }
+        }
     }
 };
 

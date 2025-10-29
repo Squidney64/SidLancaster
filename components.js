@@ -3,14 +3,14 @@
 // ============================================
 
 // Navigation Component
-function createNavigation(currentPage = 'home') {
+function createNavigation(currentPage = 'home', basePath = '') {
     const isActive = (page) => currentPage === page ? 'active' : '';
 
     return `
     <nav>
         <div class="logo">
-            <a href="index.html">
-                <img src="Logo.png" alt="Sid Lancaster">
+            <a href="${basePath}index.html">
+                <img src="${basePath}Logo.png" alt="Sid Lancaster">
             </a>
         </div>
         <button class="mobile-menu-toggle" aria-label="Toggle menu">
@@ -22,7 +22,7 @@ function createNavigation(currentPage = 'home') {
         </button>
         <ul class="nav-links">
             <li>
-                <a class="nav-btn ${isActive('home')}" href="index.html">
+                <a class="nav-btn ${isActive('home')}" href="${basePath}index.html">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                         <polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -42,10 +42,9 @@ function createNavigation(currentPage = 'home') {
                     </svg>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#all-books">All Books</a></li>
-                    <li><a href="#coming-soon">Coming Soon</a></li>
+                    <li><a href="${basePath}books.html">All Books</a></li>
                     <li class="divider"></li>
-                    <li><a href="books/the-day-when-servants-reign.html">The Day When Servants Reign</a></li>
+                    <li><a href="${basePath}books/the-day-when-servants-reign.html">The Day When Servants Reign</a></li>
                 </ul>
             </li>
             <li class="nav-dropdown">
@@ -61,13 +60,13 @@ function createNavigation(currentPage = 'home') {
                     </svg>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#all-series">All Series</a></li>
+                    <li><a href="${basePath}series.html">All Series</a></li>
                     <li class="divider"></li>
-                    <li><a href="series/severance-chronicles.html">Severance Chronicles</a></li>
+                    <li><a href="${basePath}series/severance-chronicles.html">Severance Chronicles</a></li>
                 </ul>
             </li>
             <li>
-                <a class="nav-btn ${isActive('news')}" href="news.html">
+                <a class="nav-btn ${isActive('news')}" href="${basePath}news.html">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l4 4v10a2 2 0 0 1-2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                         <path d="M7 10h6M7 14h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
@@ -76,7 +75,7 @@ function createNavigation(currentPage = 'home') {
                 </a>
             </li>
             <li>
-                <a class="nav-btn ${isActive('about')}" href="about.html">
+                <a class="nav-btn ${isActive('about')}" href="${basePath}index.html#about">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                         <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -85,7 +84,7 @@ function createNavigation(currentPage = 'home') {
                 </a>
             </li>
             <li>
-                <a class="nav-btn ${isActive('newsletter')}" href="#newsletter">
+                <a class="nav-btn ${isActive('newsletter')}" href="${basePath}index.html#newsletter">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
                         <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>

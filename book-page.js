@@ -165,6 +165,7 @@ function renderCharactersTab(book) {
     container.innerHTML = `
         <div class="characters-content">
             <h2>Main Characters</h2>
+            <p class="characters-intro">Meet the key players in this epic tale of power, freedom, and destiny.</p>
             <div class="characters-grid">
                 ${characters.map(char => `
                     <div class="character-card">
@@ -177,6 +178,11 @@ function renderCharactersTab(book) {
                         <h3 class="character-name">${char.name}</h3>
                         <p class="character-role">${char.role}</p>
                         <p class="character-description">${char.description}</p>
+                        ${char.traits && char.traits.length > 0 ? `
+                            <div class="character-traits">
+                                ${char.traits.map(trait => `<span class="trait-tag">${trait}</span>`).join('')}
+                            </div>
+                        ` : ''}
                     </div>
                 `).join('')}
             </div>
@@ -225,6 +231,16 @@ function renderProgressTab(book) {
     const currentStageIndex = stages.indexOf(book.currentStage);
     const isPublished = book.currentStage === 'Published';
 
+    // Stage icons
+    const stageIcons = {
+        'Prewriting': '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+        'Drafting': '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+        'Revising': '<path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 3v5h-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+        'Editing': '<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+        'Publishing': '<path d="M9 11l3 3L22 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+        'Published': '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 4L12 14.01l-3-3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+    };
+
     container.innerHTML = `
         <div class="progress-content">
             <div class="progress-header">
@@ -232,59 +248,26 @@ function renderProgressTab(book) {
                 <p>Follow along as this book comes to life</p>
             </div>
 
-            <div class="progress-stats-grid">
-                <div class="progress-stat-card">
-                    <div class="stat-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <polyline points="14 2 14 8 20 8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="stat-info">
-                        <h3>${book.wordCount.toLocaleString()}</h3>
-                        <p>Words Written</p>
-                    </div>
+            <div class="status-details">
+                <div class="status-metric">
+                    <span class="metric-value">${book.wordCount.toLocaleString()}</span>
+                    <span class="metric-label">Words Written</span>
                 </div>
-
-                <div class="progress-stat-card">
-                    <div class="stat-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <polyline points="22 4 12 14.01 9 11.01" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="stat-info">
-                        <h3>${Math.round((book.wordCount / book.targetWordCount) * 100)}%</h3>
-                        <p>Complete</p>
-                    </div>
+                <div class="status-metric">
+                    <span class="metric-value">${book.targetWordCount.toLocaleString()}</span>
+                    <span class="metric-label">Target Words</span>
                 </div>
-
-                <div class="progress-stat-card">
-                    <div class="stat-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <circle cx="12" cy="12" r="10" stroke-width="2"/>
-                            <path d="M12 6v6l4 2" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="stat-info">
-                        <h3>${book.status}</h3>
-                        <p>Current Stage</p>
-                    </div>
+                <div class="status-metric">
+                    <span class="metric-value">${Math.round((book.wordCount / book.targetWordCount) * 100)}%</span>
+                    <span class="metric-label">Complete</span>
                 </div>
-
-                <div class="progress-stat-card">
-                    <div class="stat-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-width="2"/>
-                            <line x1="16" y1="2" x2="16" y2="6" stroke-width="2" stroke-linecap="round"/>
-                            <line x1="8" y1="2" x2="8" y2="6" stroke-width="2" stroke-linecap="round"/>
-                            <line x1="3" y1="10" x2="21" y2="10" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <div class="stat-info">
-                        <h3>${book.releaseEstimate}</h3>
-                        <p>Est. Release</p>
-                    </div>
+                <div class="status-metric">
+                    <span class="metric-value">${book.status}</span>
+                    <span class="metric-label">Current Stage</span>
+                </div>
+                <div class="status-metric">
+                    <span class="metric-value">${book.releaseEstimate}</span>
+                    <span class="metric-label">Est. Release</span>
                 </div>
             </div>
 
@@ -295,15 +278,26 @@ function renderProgressTab(book) {
                         const isPast = index < currentStageIndex;
                         const isCurrent = index === currentStageIndex;
                         const statusClass = isPast ? 'completed' : isCurrent ? 'current' : 'upcoming';
+                        const milestone = book.progressMilestones ? book.progressMilestones[stage] : null;
 
                         return `
                             <div class="timeline-item ${statusClass}">
                                 <div class="timeline-marker">
-                                    ${isPast ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : ''}
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        ${stageIcons[stage]}
+                                    </svg>
                                 </div>
                                 <div class="timeline-content">
-                                    <h4>${stage}</h4>
+                                    <div class="timeline-header">
+                                        <h4>${stage}</h4>
+                                        ${milestone && milestone.date ? `<span class="timeline-date">${milestone.date}</span>` : ''}
+                                        ${milestone && milestone.estimatedStart ? `<span class="timeline-date estimated">Est. ${milestone.estimatedStart}</span>` : ''}
+                                        ${milestone && milestone.estimatedDate ? `<span class="timeline-date estimated">${milestone.estimatedDate}</span>` : ''}
+                                    </div>
                                     ${isCurrent ? `<p class="stage-progress">${book.stageProgress}% complete</p>` : ''}
+                                    ${milestone && milestone.description ? `<p class="timeline-description">${milestone.description}</p>` : ''}
+                                    ${milestone && milestone.currentFocus ? `<p class="timeline-focus"><strong>Current Focus:</strong> ${milestone.currentFocus}</p>` : ''}
+                                    ${milestone && milestone.notes ? `<p class="timeline-notes"><em>${milestone.notes}</em></p>` : ''}
                                 </div>
                             </div>
                         `;
