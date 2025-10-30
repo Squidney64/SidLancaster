@@ -104,59 +104,51 @@
         </ul>
     </nav>
 
-    <!-- BREADCRUMB -->
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-        <ol>
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">All Books</li>
-        </ol>
-    </nav>
-
     <!-- PAGE HEADER -->
-    <section class="page-header">
-        <div class="page-header-content">
-            <h1>All Books</h1>
-            <p>Discover epic tales of magic, adventure, and destiny</p>
+    <section class="page-header-clean">
+        <div class="header-content-wrapper">
+            <div class="header-text">
+                <h1>Books</h1>
+                <p>Epic tales of magic, power, and destiny</p>
+            </div>
+
+            <!-- INTEGRATED FILTERS -->
+            <div class="header-filters">
+                <button class="quick-filter active" data-filter="all">
+                    All <span class="filter-count" id="countAll">0</span>
+                </button>
+                <button class="quick-filter" data-filter="published">
+                    Published <span class="filter-count" id="countPublished">0</span>
+                </button>
+                <button class="quick-filter" data-filter="drafting">
+                    In Progress <span class="filter-count" id="countDrafting">0</span>
+                </button>
+                <button class="quick-filter" data-filter="upcoming">
+                    Coming Soon <span class="filter-count" id="countUpcoming">0</span>
+                </button>
+            </div>
         </div>
     </section>
 
     <!-- BOOKS SECTION -->
-    <section class="all-books-section">
-        <div class="books-container">
-            <!-- FILTERS -->
-            <div class="books-filters">
-                <button class="filter-btn active" data-filter="all">All Books</button>
-                <button class="filter-btn" data-filter="published">Published</button>
-                <button class="filter-btn" data-filter="upcoming">Upcoming</button>
-                <button class="filter-btn" data-filter="drafting">In Progress</button>
-            </div>
-
-            <!-- SORT OPTIONS -->
-            <div class="sort-options">
-                <label for="sortSelect">Sort by:</label>
-                <select id="sortSelect">
-                    <option value="release-date">Release Date</option>
-                    <option value="title">Title (A-Z)</option>
-                    <option value="series">Series</option>
-                </select>
-            </div>
-
+    <section class="books-main-section">
+        <div class="books-wrapper">
             <!-- BOOKS GRID -->
             <div class="books-grid" id="booksGrid">
                 <!-- Books will be generated here -->
             </div>
-        </div>
-    </section>
 
-    <!-- NEWSLETTER CTA -->
-    <section id="newsletter">
-        <div class="newsletter-container">
-            <h2>Stay Updated on New Releases</h2>
-            <p>Be the first to know when new books are released, get exclusive previews, and more.</p>
-            <form class="newsletter-form" onsubmit="return false;">
-                <input type="email" placeholder="Your email address" required>
-                <button type="submit">Subscribe</button>
-            </form>
+            <!-- EMPTY STATE -->
+            <div class="empty-state-clean" id="emptyState" style="display: none;">
+                <div class="empty-icon-wrapper">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>No books match this filter</h3>
+                <p>Try selecting a different category</p>
+            </div>
         </div>
     </section>
 

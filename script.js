@@ -193,24 +193,34 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenuToggle.classList.toggle('active');
         navLinks.classList.toggle('active');
 
-        // Prevent body scroll when menu is open
+        // Prevent body scroll when menu is open and add overlay class
         if (navLinks.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
+            document.body.classList.add('menu-open');
         } else {
             document.body.style.overflow = '';
+            document.body.classList.remove('menu-open');
         }
     });
 
-    // Close menu when clicking a nav link
+    // Close menu when clicking a nav link (but not dropdown toggles)
     navButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            // Don't close menu if this is a dropdown toggle on mobile
+            const isDropdownToggle = button.closest('.nav-dropdown');
+            if (isDropdownToggle && window.innerWidth <= 1024) {
+                return; // Let the dropdown handler manage this
+            }
+
+            // Only close menu for regular nav links
             mobileMenuToggle.classList.remove('active');
             navLinks.classList.remove('active');
             document.body.style.overflow = '';
+            document.body.classList.remove('menu-open');
         });
     });
 
-    // Close menu when clicking outside
+    // Close menu when clicking outside (on overlay)
     document.addEventListener('click', (e) => {
         if (!navLinks.contains(e.target) &&
             !mobileMenuToggle.contains(e.target) &&
@@ -218,6 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileMenuToggle.classList.remove('active');
             navLinks.classList.remove('active');
             document.body.style.overflow = '';
+            document.body.classList.remove('menu-open');
         }
     });
 
@@ -227,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileMenuToggle.classList.remove('active');
             navLinks.classList.remove('active');
             document.body.style.overflow = '';
+            document.body.classList.remove('menu-open');
         }
     });
 
@@ -243,6 +255,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     e.preventDefault();
                     dropdown.classList.toggle('active');
                 }
+            });
+
+            // Close mobile menu when clicking a dropdown link
+            const dropdownLinks = dropdownMenu.querySelectorAll('a');
+            dropdownLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 1024) {
+                        mobileMenuToggle.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        document.body.style.overflow = '';
+                        document.body.classList.remove('menu-open');
+                    }
+                });
             });
         }
     });
