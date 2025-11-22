@@ -1,7 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Read(//c/Users/sidla/OneDrive/Desktop/**)"
+      "Read(//c/Users/sidla/OneDrive/Desktop/**)",
+      "Bash(while read line)",
+      "Bash(do grep -n \"^\\.\" \"c:\\Users\\sidla\\Desktop\\Personal Site\\styles.css\")",
+      "Bash(done)",
+      "Bash(for class in \".hero\" \".book-card\" \".about-container\" \".book-cover-placeholder\" \".sample-text\" \".progress-bar-mini\" \".status-icon\" \".content-warnings-section\" \".overview-card\" \".post-link\")",
+      "Bash(do echo \"=== $class ===\")",
+      "Bash(while read class)",
+      "Bash(for class in \".progress-bar-fill\" \".progress-fill-mini\" \".about-preview-container\" \".book-cover-container\" \".character-card\" \".overview-card\")",
+      "Bash(for class in \".book-header\" \".book-synopsis\" \".book-title\" \".book-status-badge\" \".books-filters\" \".books-grid\")"
     ],
     "deny": [],
     "ask": []

@@ -111,18 +111,25 @@
         <a href="#featured-book" class="cta">Explore My Worlds</a>
     </section>
 
-    <!-- FEATURED BOOK SPOTLIGHT -->
-    <section id="featured-book" class="featured-book-section">
+    <!-- FEATURED BOOK CAROUSEL -->
+    <section id="books">
         <div class="section-header">
-            <h2>Featured Work</h2>
-            <p>Currently working on</p>
+            <h2>Books and Series</h2>
+            <p>Stories of magic, intrigue, and worlds where servants rise to challenge empires</p>
         </div>
-        <div class="featured-book-container" id="featuredBookContainer">
-            <!-- Will be populated by JavaScript -->
-        </div>
-        <div class="featured-cta">
-            <a href="books/the-day-when-servants-reign.html" class="btn btn-primary">Learn More About This Book</a>
-            <a href="series/severance-chronicles.html" class="btn btn-secondary">Explore the Series</a>
+
+        <div class="carousel-container">
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Books will be generated here -->
+                </div>
+            </div>
+
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="prevBtn" aria-label="Previous book">←</button>
+                <div class="carousel-indicators" id="indicators"></div>
+                <button class="carousel-btn" id="nextBtn" aria-label="Next book">→</button>
+            </div>
         </div>
     </section>
 

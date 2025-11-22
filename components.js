@@ -44,7 +44,9 @@ function createNavigation(currentPage = 'home', basePath = '') {
                 <ul class="dropdown-menu">
                     <li><a href="${basePath}books.html">All Books</a></li>
                     <li class="divider"></li>
-                    <li><a href="${basePath}books/the-day-when-servants-reign.html">The Day When Servants Reign</a></li>
+                    ${typeof booksData !== 'undefined' ? Object.values(booksData).map(book =>
+                        `<li><a href="${basePath}books/${book.slug}.html">${book.title}</a></li>`
+                    ).join('') : '<li><a href="${basePath}books/the-day-when-servants-reign.html">The Day When Servants Reign</a></li>'}
                 </ul>
             </li>
             <li class="nav-dropdown">
@@ -62,7 +64,9 @@ function createNavigation(currentPage = 'home', basePath = '') {
                 <ul class="dropdown-menu">
                     <li><a href="${basePath}series.html">All Series</a></li>
                     <li class="divider"></li>
-                    <li><a href="${basePath}series/severance-chronicles.html">Severance Chronicles</a></li>
+                    ${typeof seriesData !== 'undefined' ? Object.values(seriesData).map(series =>
+                        `<li><a href="${basePath}series/${series.slug}.html">${series.name}</a></li>`
+                    ).join('') : '<li><a href="${basePath}series/severance-chronicles.html">Severance Chronicles</a></li>'}
                 </ul>
             </li>
             <li>
@@ -223,8 +227,62 @@ function createNewsPostCard(post, size = 'regular') {
     `;
 }
 
+// Populate navigation dropdowns dynamically
+function populateNavigationDropdowns() {
+    // Populate Books dropdown
+    const booksDropdown = document.querySelector('.nav-dropdown .dropdown-menu');
+    if (booksDropdown && typeof booksData !== 'undefined') {
+        const booksList = Object.values(booksData);
+        if (booksList.length > 0) {
+            // Find existing book links (everything after the divider)
+            const existingLinks = Array.from(booksDropdown.querySelectorAll('li:not(.divider)'));
+            existingLinks.slice(1).forEach(li => li.remove()); // Remove all but "All Books"
+
+            // Add books from data
+            booksList.forEach(book => {
+                const li = document.createElement('li');
+                const basePath = window.location.pathname.includes('/books/') ||
+                                 window.location.pathname.includes('/series/') ||
+                                 window.location.pathname.includes('/news/') ? '../' : '';
+                li.innerHTML = `<a href="${basePath}books/${book.slug}.html">${book.title}</a>`;
+                booksDropdown.appendChild(li);
+            });
+        }
+    }
+
+    // Populate Series dropdown
+    const seriesDropdowns = document.querySelectorAll('.nav-dropdown');
+    seriesDropdowns.forEach(dropdown => {
+        const btn = dropdown.querySelector('.nav-btn');
+        if (btn && btn.textContent.includes('Series')) {
+            const seriesMenu = dropdown.querySelector('.dropdown-menu');
+            if (seriesMenu && typeof seriesData !== 'undefined') {
+                const seriesList = Object.values(seriesData);
+                if (seriesList.length > 0) {
+                    // Find existing series links (everything after the divider)
+                    const existingLinks = Array.from(seriesMenu.querySelectorAll('li:not(.divider)'));
+                    existingLinks.slice(1).forEach(li => li.remove()); // Remove all but "All Series"
+
+                    // Add series from data
+                    seriesList.forEach(series => {
+                        const li = document.createElement('li');
+                        const basePath = window.location.pathname.includes('/books/') ||
+                                         window.location.pathname.includes('/series/') ||
+                                         window.location.pathname.includes('/news/') ? '../' : '';
+                        li.innerHTML = `<a href="${basePath}series/${series.slug}.html">${series.name}</a>`;
+                        seriesMenu.appendChild(li);
+                    });
+                }
+            }
+        }
+    });
+}
+
 // Initialize shared functionality
 function initializeSharedComponents() {
+    // Populate navigation dropdowns first
+    populateNavigationDropdowns();
+
     // Mobile menu toggle
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -281,6 +339,7 @@ if (typeof window !== 'undefined') {
         createBreadcrumb,
         createBookCard,
         createNewsPostCard,
+        populateNavigationDropdowns,
         initializeSharedComponents
     };
 }

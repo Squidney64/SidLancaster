@@ -183,7 +183,6 @@ function setupCarousel() {
             if (currentPage > 0) {
                 currentPage--;
                 renderNewsPage();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
     }
@@ -196,7 +195,6 @@ function setupCarousel() {
             if (currentPage < totalPages - 1) {
                 currentPage++;
                 renderNewsPage();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
     }

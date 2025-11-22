@@ -3,6 +3,11 @@
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize shared components (navigation, etc.)
+    if (window.Components && typeof Components.initializeSharedComponents === 'function') {
+        Components.initializeSharedComponents();
+    }
+
     // Get series slug from URL
     const path = window.location.pathname;
     const seriesSlug = path.split('/').pop().replace('.html', '');

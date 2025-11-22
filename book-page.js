@@ -209,7 +209,7 @@ function renderSampleTab(book) {
     container.innerHTML = `
         <div class="sample-content">
             <div class="sample-header">
-                <h2>Chapter 1: The Beginning</h2>
+                <h2>${book.sampleChapterHeading}</h2>
                 <p class="sample-note">This is an early draft and may differ from the final published version.</p>
             </div>
             <div class="sample-text">
