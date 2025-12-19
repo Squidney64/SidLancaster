@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Burning of Golandra - Standalone Fantasy Novel</title>
+    <meta name="description" content="The Burning of Golandra: A standalone fantasy novel. When a city burns, empires fall and legends are forged in the flames.">
+    <link rel="icon" href="../../assets/images/Logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../src/css/styles.css">
+</head>
+<body>
+    <div class="particles" id="particles">
+        <div class="particle-layer" data-speed="-0.8"></div>
+        <div class="particle-layer" data-speed="-0.65"></div>
+        <div class="particle-layer" data-speed="-0.5"></div>
+        <div class="particle-layer" data-speed="-0.35"></div>
+        <div class="particle-layer" data-speed="-0.2"></div>
+    </div>
+
+    <nav>
+        <div class="logo">
+            <a href="../index.html">
+                <img src="../../assets/images/Logo.png" alt="Sid Lancaster">
+            </a>
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+        <ul class="nav-links">
+            <li>
+                <a class="nav-btn" href="../index.html">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="nav-dropdown">
+                <a class="nav-btn active" href="../books.html">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 7a4 4 0 0 1 4-4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a4 4 0 0 1-4-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <path d="M22 7a2 2 0 0 0-2-2H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <span>Books</span>
+                    <svg class="dropdown-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="../books.html">All Books</a></li>
+                    <li class="divider"></li>
+                    <li><a href="the-day-when-servants-reign.html">The Day When Servants Reign</a></li>
+                </ul>
+            </li>
+            <li class="nav-dropdown">
+                <a class="nav-btn" href="../series.html">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>Series</span>
+                    <svg class="dropdown-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="../series.html">All Series</a></li>
+                    <li class="divider"></li>
+                    <li><a href="../series/severance-chronicles.html">Severance Chronicles</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="nav-btn" href="../news.html">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l4 4v10a2 2 0 0 1-2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <path d="M7 10h6M7 14h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                    </svg>
+                    <span>News</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-btn" href="../index.html#about">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-btn" href="../index.html#newsletter">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <span>Newsletter</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="../books.html">Books</a></li>
+            <li class="breadcrumb-item active" aria-current="page">The Burning of Golandra</li>
+        </ol>
+    </nav>
+
+    <!-- BOOK HERO -->
+    <section class="book-hero burning-of-golandra">
+        <div class="book-hero-content" id="bookHeroContent">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- BOOK DETAILS TABS -->
+    <section class="book-details">
+        <div class="book-details-container">
+            <div class="book-tabs">
+                <button class="tab-btn active" data-tab="overview">Overview</button>
+                <button class="tab-btn" data-tab="characters">Characters</button>
+                <button class="tab-btn" data-tab="sample">Sample Chapter</button>
+                <button class="tab-btn" data-tab="progress">Writing Progress</button>
+            </div>
+
+            <div class="tab-content active" id="overview-tab">
+                <!-- Will be populated by JavaScript -->
+            </div>
+
+            <div class="tab-content" id="characters-tab">
+                <!-- Will be populated by JavaScript -->
+            </div>
+
+            <div class="tab-content" id="sample-tab">
+                <!-- Will be populated by JavaScript -->
+            </div>
+
+            <div class="tab-content" id="progress-tab">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- RELATED NEWS -->
+    <section class="related-news">
+        <div class="section-header">
+            <h2>Latest Updates</h2>
+            <p>Recent news about this book</p>
+        </div>
+        <div class="related-news-grid" id="relatedNewsGrid">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- NEWSLETTER CTA -->
+    <section id="newsletter">
+        <div class="newsletter-container">
+            <h2>Follow the Journey</h2>
+            <p>Get exclusive updates, early chapters, and behind-the-scenes content as I write this book.</p>
+            <form class="newsletter-form" onsubmit="return false;">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="../news.html">News</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#newsletter">Newsletter</a>
+                <a href="#privacy">Privacy</a>
+            </div>
+            <p class="copyright">&copy; 2025 Sid Lancaster. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../src/data/data.js"></script>
+    <script src="../../src/js/components.js"></script>
+    <script>
+        // Override particle system with wind-driven ash/snow effect for Golandra
+        const snowColors = [
+            'rgb(255, 255, 255)',      // Pure white
+            'rgb(250, 250, 255)',      // Very light blue-white
+            'rgb(240, 248, 255)',      // Alice blue
+            'rgb(230, 240, 255)',      // Light icy blue
+            'rgb(220, 235, 255)',      // Pale blue
+            'rgb(245, 245, 250)',      // Off-white
+            'rgb(200, 220, 255)',      // Icy blue
+            'rgb(210, 230, 255)',      // Light frost blue
+            'rgb(235, 245, 255)',      // Very pale blue
+            'rgb(190, 210, 240)',      // Steel blue tint
+            'rgb(215, 225, 245)',      // Soft blue-white
+            'rgb(225, 235, 250)',      // Misty blue
+            'rgb(255, 250, 250)',      // Snow white
+            'rgb(205, 220, 245)'       // Cool blue-gray
+        ];
+
+        let particleContainer = null;
+        let particleLayers = [];
+        let snowflakeIndex = 0;
+        let snowflakeCounter = 0;
+        let capSnowflakeCount = 0;
+        const keyframeCache = new Map();
+
+        function initializeSnowParticleSystem() {
+            particleContainer = document.getElementById('particles');
+            if (!particleContainer) return;
+
+            particleLayers = document.querySelectorAll('.particle-layer');
+            if (particleLayers.length === 0) return;
+
+            calculateCapSnowflakeCount();
+            syncParticleLayerHeights();
+
+            // Create initial snowflakes
+            particleLayers.forEach((layer, layerIndex) => {
+                const initialSnowflakes = 3;
+                for (let i = 0; i < initialSnowflakes; i++) {
+                    createSnowflake(layer, layerIndex);
+                }
+            });
+
+            // Start creating new snowflakes - faster spawn rate for wind effect
+            setInterval(() => {
+                if (particleLayers.length > 0 && snowflakeCounter < calculateCapSnowflakeCount()) {
+                    let randomLayerIndex = Math.floor(Math.random() * particleLayers.length);
+                    createSnowflake(particleLayers[randomLayerIndex], randomLayerIndex);
+                }
+            }, 50); // Spawn every 50ms for more intense effect
+
+            // Setup event listeners
+            window.addEventListener('scroll', updateParallax, { passive: true });
+            window.addEventListener('resize', () => {
+                calculateCapSnowflakeCount();
+                syncParticleLayerHeights();
+            });
+            window.addEventListener('load', () => {
+                setTimeout(syncParticleLayerHeights, 500);
+            });
+
+            // Start animation loop
+            requestAnimationFrame(updateParticles);
+        }
+
+        function syncParticleLayerHeights() {
+            const docHeight = document.documentElement.scrollHeight;
+            particleLayers.forEach(layer => {
+                layer.style.height = docHeight + 'px';
+            });
+        }
+
+        function calculateCapSnowflakeCount() {
+            const pixelsPerSnowflake = 600 * 600;
+            const pageArea = document.documentElement.scrollWidth * document.documentElement.scrollHeight;
+            const snowflakesPerLayer = Math.floor(pageArea / pixelsPerSnowflake);
+            capSnowflakeCount = snowflakesPerLayer * particleLayers.length;
+            return capSnowflakeCount;
+        }
+
+        // Store active particles for velocity-based updates
+        const activeParticles = [];
+
+        function createSnowflake(layer, layerIndex) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'mote snowflake';
+
+            // Layer depth factor: 0 = front (fastest), 4 = back (slowest)
+            // Higher layerIndex = further back
+            const depthFactor = layerIndex / (particleLayers.length - 1); // 0.0 to 1.0
+
+            // Size: larger in front, smaller in back
+            // Front layers: 5-20px, Back layers: 2-8px
+            const minSize = 2 + (3 * (1 - depthFactor));
+            const maxSize = 8 + (12 * (1 - depthFactor));
+            const size = minSize + Math.random() * (maxSize - minSize);
+
+            // Random color with random transparency
+            const baseColor = snowColors[Math.floor(Math.random() * snowColors.length)];
+            const opacity = 0.3 + Math.random() * 0.7; // 0.3 to 1.0 opacity
+            const color = baseColor.replace('rgb', 'rgba').replace(')', `, ${opacity})`);
+
+            // Spawn anywhere on screen
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight + window.pageYOffset;
+
+            snowflake.style.width = size + 'px';
+            snowflake.style.height = size + 'px';
+            snowflake.style.background = color;
+            snowflake.style.position = 'absolute';
+            snowflake.style.borderRadius = '50%';
+            snowflake.style.opacity = '0'; // Start invisible, will fade in
+
+            layer.appendChild(snowflake);
+            snowflakeCounter++;
+
+            // Velocity: faster in front, slower in back
+            // Front layers: 100-250 px/s, Back layers: 40-100 px/s
+            const speedMultiplier = 0.4 + (0.6 * (1 - depthFactor));
+
+            // Velocity-based particle data
+            const particle = {
+                element: snowflake,
+                x: x,
+                y: y,
+                // Base velocity that's always positive (rightward), scaled by depth
+                baseVelocityX: (100 + Math.random() * 150) * speedMultiplier,
+                baseVelocityY: (20 + Math.random() * 40) * speedMultiplier,
+                // Rotation - slower in back
+                rotation: Math.random() * 360,
+                rotationSpeed: (30 + Math.random() * 90) * speedMultiplier,
+                // Wind variation for speed changes
+                windPhase: Math.random() * Math.PI * 2,
+                windFrequency: 0.3 + Math.random() * 0.5,
+                // Swirl parameters for subtle direction changes
+                swirlPhaseX: Math.random() * Math.PI * 2,
+                swirlPhaseY: Math.random() * Math.PI * 2,
+                swirlFrequencyX: 0.4 + Math.random() * 0.6, // Horizontal swirl
+                swirlFrequencyY: 0.5 + Math.random() * 0.8, // Vertical swirl
+                swirlIntensity: (15 + Math.random() * 25) * speedMultiplier,
+                // Opacity for fading - more subtle transitions
+                maxOpacity: opacity,
+                fadeInDuration: 1.0, // 1.0 second to fade in (more subtle)
+                fadeOutDuration: 2.0, // 2.0 seconds to fade out (more subtle)
+                // Lifetime - longer for slower particles in back
+                age: 0,
+                maxAge: (8 + Math.random() * 6) * (1 + depthFactor * 0.5) // Back layers live longer
+            };
+
+            activeParticles.push(particle);
+        }
+
+        // Animation loop for velocity-based particles
+        let lastTime = performance.now();
+
+        function updateParticles() {
+            const currentTime = performance.now();
+            const deltaTime = (currentTime - lastTime) / 1000; // Convert to seconds
+            lastTime = currentTime;
+
+            const screenWidth = window.innerWidth;
+
+            for (let i = activeParticles.length - 1; i >= 0; i--) {
+                const p = activeParticles[i];
+                p.age += deltaTime;
+
+                // Remove old particles
+                if (p.age > p.maxAge) {
+                    if (p.element.parentNode) {
+                        p.element.remove();
+                        snowflakeCounter--;
+                    }
+                    activeParticles.splice(i, 1);
+                    continue;
+                }
+
+                // Calculate wind gust variation (0.7x to 1.3x base speed)
+                const windVariation = 1.0 + 0.3 * Math.sin(p.windPhase + p.age * p.windFrequency * Math.PI * 2);
+
+                // Calculate subtle swirl offsets for direction changes
+                const swirlX = p.swirlIntensity * Math.sin(p.swirlPhaseX + p.age * p.swirlFrequencyX * Math.PI * 2);
+                const swirlY = p.swirlIntensity * 0.5 * Math.sin(p.swirlPhaseY + p.age * p.swirlFrequencyY * Math.PI * 2);
+
+                // Update position - base direction with subtle swirling
+                const velocityX = p.baseVelocityX * windVariation + swirlX; // Mostly right, slight horizontal swirl
+                const velocityY = p.baseVelocityY + swirlY; // Mostly down, slight vertical swirl
+
+                p.x += velocityX * deltaTime;
+                p.y += velocityY * deltaTime;
+
+                // Wrap around screen - teleport to left when going off right
+                if (p.x > screenWidth + 50) {
+                    p.x = -50;
+                }
+
+                // Update rotation
+                p.rotation += p.rotationSpeed * deltaTime;
+
+                // Calculate opacity based on age (fade in and fade out)
+                let currentOpacity;
+                if (p.age < p.fadeInDuration) {
+                    // Fade in
+                    currentOpacity = (p.age / p.fadeInDuration) * p.maxOpacity;
+                } else if (p.age > p.maxAge - p.fadeOutDuration) {
+                    // Fade out
+                    const fadeOutProgress = (p.maxAge - p.age) / p.fadeOutDuration;
+                    currentOpacity = fadeOutProgress * p.maxOpacity;
+                } else {
+                    // Full opacity
+                    currentOpacity = p.maxOpacity;
+                }
+
+                // Apply transform and opacity
+                p.element.style.left = p.x + 'px';
+                p.element.style.top = p.y + 'px';
+                p.element.style.transform = `rotate(${p.rotation}deg)`;
+                p.element.style.opacity = currentOpacity;
+            }
+
+            requestAnimationFrame(updateParticles);
+        }
+
+        function updateParallax() {
+            const scrollPos = window.pageYOffset;
+            particleLayers.forEach(layer => {
+                const speed = parseFloat(layer.dataset.speed) || 0.5;
+                layer.style.transform = `translateY(${scrollPos * speed}px)`;
+            });
+        }
+
+        // Initialize snow system instead of default particles
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeSnowParticleSystem);
+        } else {
+            initializeSnowParticleSystem();
+        }
+    </script>
+    <script src="../../src/js/book-page.js"></script>
+</body>
+</html>

@@ -9,7 +9,14 @@
       "Bash(do echo \"=== $class ===\")",
       "Bash(while read class)",
       "Bash(for class in \".progress-bar-fill\" \".progress-fill-mini\" \".about-preview-container\" \".book-cover-container\" \".character-card\" \".overview-card\")",
-      "Bash(for class in \".book-header\" \".book-synopsis\" \".book-title\" \".book-status-badge\" \".books-filters\" \".books-grid\")"
+      "Bash(for class in \".book-header\" \".book-synopsis\" \".book-title\" \".book-status-badge\" \".books-filters\" \".books-grid\")",
+      "Bash(tree:*)",
+      "Bash(test:*)",
+      "Bash(find:*)",
+      "Bash(for file in \"c:\\Users\\sidla\\Desktop\\Personal Site\\public\\books\"/*.html)",
+      "Bash(do sed -i 's|href=\"\"../../index.html\"\"|href=\"\"../index.html\"\"|g; s|href=\"\"../../index.html#|href=\"\"../index.html#|g' \"$file\")",
+      "Bash(for file in \"c:\\Users\\sidla\\Desktop\\Personal Site\\public\\series\"/*.html)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

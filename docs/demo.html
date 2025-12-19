@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Tracker Implementation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a1821;
+            color: #e8f4f8;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #ff8c42;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #4ecdc4;
+            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: #ffd700;
+            margin: 1.5rem 0 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .intro {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #4ecdc4;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            background: rgba(10, 24, 33, 0.5);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(78, 205, 196, 0.2);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff8c42, #ffd700);
+            color: #0a1821;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+
+        code {
+            background: rgba(78, 205, 196, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #ffd700;
+        }
+
+        pre {
+            background: #1a2f3f;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid rgba(78, 205, 196, 0.2);
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #e8f4f8;
+        }
+
+        .demo-section {
+            background: rgba(255, 140, 66, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 2px solid rgba(255, 140, 66, 0.3);
+        }
+
+        .demo-title {
+            color: #ff8c42;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* PROGRESS TRACKER STYLES */
+        .book-status-tracker {
+            padding: 1.5rem;
+            background: rgba(78, 205, 196, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(78, 205, 196, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .status-title {
+            font-size: 0.9rem;
+            color: #4ecdc4;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .status-percentage {
+            font-size: 1.5rem;
+            color: #ff8c42;
+            font-weight: 700;
+        }
+
+        .status-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0.5rem;
+            position: relative;
+            padding: 0 10px;
+            width: 100%;
+            min-height: 80px;
+        }
+
+        .status-timeline::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            right: 10px;
+            height: 3px;
+            background: rgba(78, 205, 196, 0.15);
+            z-index: 0;
+        }
+
+        .status-progress-bar {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            height: 3px;
+            background: linear-gradient(to right, #4ecdc4, #ff8c42, #ffd700);
+            z-index: 1;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(255, 140, 66, 0.5);
+        }
+
+        .status-step {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .status-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(10, 24, 33, 0.9);
+            border: 3px solid rgba(78, 205, 196, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .status-step.completed .status-icon {
+            background: linear-gradient(135deg, #ff8c42, #ffd700);
+            border-color: #ff8c42;
+            box-shadow: 0 4px 20px rgba(255, 140, 66, 0.5);
+            transform: scale(1.1);
+        }
+
+        .status-step.active .status-icon {
+            background: rgba(78, 205, 196, 0.2);
+            border-color: #4ecdc4;
+            border-width: 3px;
+            animation: pulse-active 2s infinite;
+            box-shadow: 0 4px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        @keyframes pulse-active {
+            0%, 100% {
+                box-shadow: 0 4px 20px rgba(78, 205, 196, 0.4), 0 0 0 0 rgba(78, 205, 196, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(78, 205, 196, 0.4), 0 0 0 12px rgba(78, 205, 196, 0);
+            }
+        }
+
+        .status-step.published .status-icon {
+            background: linear-gradient(135deg, #ffd700, #4ecdc4);
+            border-color: #ffd700;
+            box-shadow: 0 4px 25px rgba(255, 215, 0, 0.6);
+            transform: scale(1.15);
+        }
+
+        .status-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: rgba(232, 244, 248, 0.6);
+            fill: none;
+            transition: all 0.3s ease;
+        }
+
+        .status-step.completed .status-icon svg,
+        .status-step.published .status-icon svg {
+            stroke: #0a1821;
+            transform: scale(1.1);
+        }
+
+        .status-step.active .status-icon svg {
+            stroke: #4ecdc4;
+            filter: drop-shadow(0 0 2px #4ecdc4);
+        }
+
+        .status-label {
+            font-size: 0.7rem;
+            text-align: center;
+            color: rgba(232, 244, 248, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .status-step.completed .status-label,
+        .status-step.published .status-label {
+            color: #ff8c42;
+            font-weight: 700;
+        }
+
+        .status-step.active .status-label {
+            color: #4ecdc4;
+            font-weight: 700;
+        }
+
+        .status-step.published .status-label {
+            color: #ffd700;
+        }
+
+        .status-details {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(78, 205, 196, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .status-metric {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .metric-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ff8c42;
+        }
+
+        .metric-label {
+            font-size: 0.7rem;
+            color: rgba(232, 244, 248, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .note {
+            background: rgba(255, 140, 66, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #ff8c42;
+            margin: 1rem 0;
+        }
+
+        .warning {
+            background: rgba(255, 107, 107, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b6b;
+            margin: 1rem 0;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #ff8c42, #ffd700);
+            color: #0a1821;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            margin: 1rem 0.5rem 1rem 0;
+            transition: transform 0.3s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Progress Tracker Implementation Guide</h1>
+        
+        <div class="intro">
+            <p><strong>Welcome!</strong> This guide will walk you through implementing the book progress tracker step by step. By the end, you'll have a beautiful visual timeline showing your writing journey from Prewriting to Published.</p>
+        </div>
+
+        <h2>Step 1: Understanding the Data Structure</h2>
+        <div class="step">
+            <span class="step-number">STEP 1</span>
+            <p>First, you need to add progress data to each book object. Here's what each book needs:</p>
+            
+            <pre><code>{
+    title: "Your Book Title",
+    // ... other book data ...
+    
+    // NEW FIELDS FOR PROGRESS TRACKER:
+    currentStage: "Drafting",        // Which stage you're in
+    stageProgress: 30,               // Progress % in current stage (0-100)
+    wordCount: 45000,                // Current word count
+    targetWordCount: 150000,         // Goal word count
+    published: false                 // true when published
+}</code></pre>
+
+            <div class="note">
+                <strong>💡 Note:</strong> The <code>currentStage</code> must be one of these exact values:
+                <ul>
+                    <li>"Prewriting"</li>
+                    <li>"Drafting"</li>
+                    <li>"Revising"</li>
+                    <li>"Editing"</li>
+                    <li>"Publishing"</li>
+                    <li>"Published" (only when published = true)</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Step 2: Add the CSS Styles</h2>
+        <div class="step">
+            <span class="step-number">STEP 2</span>
+            <p>Copy all the CSS from the <code>/* BOOK STATUS TRACKER */</code> section in your stylesheet. This includes:</p>
+            
+            <ul>
+                <li><code>.book-status-tracker</code> - Main container</li>
+                <li><code>.status-timeline</code> - The horizontal line</li>
+                <li><code>.status-progress-bar</code> - Animated fill bar</li>
+                <li><code>.status-step</code> - Each stage circle</li>
+                <li><code>.status-icon</code> - The circular icons</li>
+                <li>Animation keyframes for <code>pulse-active</code></li>
+            </ul>
+
+            <div class="warning">
+                <strong>⚠️ Important:</strong> Make sure you copy ALL the CSS, including the different states:
+                <ul>
+                    <li><code>.status-step.completed</code></li>
+                    <li><code>.status-step.active</code></li>
+                    <li><code>.status-step.published</code></li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Step 3: Create the Generator Function</h2>
+        <div class="step">
+            <span class="step-number">STEP 3</span>
+            <p>Inside your <code>renderBooks()</code> function, add this helper function:</p>
+            
+            <pre><code>// Define the 6 stages
+const stages = ['Prewriting', 'Drafting', 'Revising', 
+                'Editing', 'Publishing', 'Published'];
+
+// Calculate overall progress
+const currentStageIndex = stages.indexOf(book.currentStage);
+const stagesCompleted = currentStageIndex;
+const progressInCurrentStage = book.stageProgress / 100;
+const overallProgress = 
+    ((stagesCompleted + progressInCurrentStage) / stages.length * 100)
+    .toFixed(0);
+
+// Function to generate the tracker HTML
+const generateProgressTracker = () => {
+    // Icon SVGs for each stage
+    const icons = {
+        'Prewriting': '&lt;path d="M14.7 6.3..." /&gt;',
+        'Drafting': '&lt;path d="M11 4H4..." /&gt;',
+        // ... etc
+    };
+
+    return `
+        &lt;div class="book-status-tracker"&gt;
+            &lt;!-- Header with percentage --&gt;
+            &lt;div class="status-header"&gt;
+                &lt;span class="status-title"&gt;Writing Journey&lt;/span&gt;
+                &lt;span class="status-percentage"&gt;${overallProgress}%&lt;/span&gt;
+            &lt;/div&gt;
+            
+            &lt;!-- Timeline --&gt;
+            &lt;div class="status-timeline"&gt;
+                &lt;div class="status-progress-bar" 
+                     style="width: ${overallProgress}%"&gt;&lt;/div&gt;
+                
+                ${stages.map((stage, idx) => {
+                    // Determine the state
+                    let stepClass = '';
+                    if (idx < currentStageIndex) {
+                        stepClass = 'completed';
+                    } else if (idx === currentStageIndex) {
+                        stepClass = 'active';
+                    } else if (stage === 'Published' && book.published) {
+                        stepClass = 'published';
+                    }
+                    
+                    return `
+                    &lt;div class="status-step ${stepClass}"&gt;
+                        &lt;div class="status-icon"&gt;
+                            &lt;svg viewBox="0 0 24 24"&gt;
+                                ${icons[stage]}
+                            &lt;/svg&gt;
+                        &lt;/div&gt;
+                        &lt;span class="status-label"&gt;${stage}&lt;/span&gt;
+                    &lt;/div&gt;
+                    `;
+                }).join('')}
+            &lt;/div&gt;
+            
+            &lt;!-- Metrics --&gt;
+            &lt;div class="status-details"&gt;
+                &lt;!-- Word count, stage, etc --&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    `;
+};</code></pre>
+        </div>
+
+        <h2>Step 4: Insert into Book Card</h2>
+        <div class="step">
+            <span class="step-number">STEP 4</span>
+            <p>In your book card template, add this line after the content warnings:</p>
+            
+            <pre><code>&lt;!-- Content warnings section --&gt;
+${book.contentWarnings ? `&lt;div class="content-warnings"&gt;...&lt;/div&gt;` : ''}
+
+&lt;!-- ADD THIS LINE: --&gt;
+${typeof book.stageProgress === 'number' ? generateProgressTracker() : ''}
+
+&lt;!-- Rest of book info --&gt;</code></pre>
+
+            <div class="note">
+                <strong>💡 Why <code>typeof book.stageProgress === 'number'</code>?</strong><br>
+                This only shows the tracker if <code>stageProgress</code> exists and is a number. Books without progress data won't show the tracker.
+            </div>
+        </div>
+
+        <h2>Step 5: Test with Sample Data</h2>
+        <div class="step">
+            <span class="step-number">STEP 5</span>
+            <p>Update one of your books with progress data to test:</p>
+            
+            <pre><code>{
+    id: 1,
+    title: "The Day When Servants Reign",
+    currentStage: "Drafting",
+    stageProgress: 30,
+    wordCount: 45000,
+    targetWordCount: 150000,
+    published: false,
+    // ... rest of book data
+}</code></pre>
+
+            <p>Refresh your page and you should see:</p>
+            <ul>
+                <li>✅ "Prewriting" with orange/gold fill (completed)</li>
+                <li>🔄 "Drafting" with pulsing teal border (active)</li>
+                <li>⚪ "Revising", "Editing", "Publishing", "Published" in gray (future)</li>
+                <li>📊 Progress bar filled to ~21% (1 stage + 30% of current)</li>
+            </ul>
+        </div>
+
+        <h2>Live Demo</h2>
+        <div class="demo-section">
+            <div class="demo-title">Example: Book at 30% of Drafting Stage</div>
+            
+            <div class="book-status-tracker">
+                <div class="status-header">
+                    <span class="status-title">Writing Journey</span>
+                    <span class="status-percentage">22%</span>
+                </div>
+                
+                <div class="status-timeline">
+                    <div class="status-progress-bar" style="width: 22%"></div>
+                    
+                    <!-- Prewriting - Completed -->
+                    <div class="status-step completed">
+                        <div class="status-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="status-label">Prewriting</span>
+                    </div>
+                    
+                    <!-- Drafting - Active -->
+                    <div class="status-step active">
+                        <div class="status-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="status-label">Drafting</span>
+                    </div>
+                    
+                    <!-- Revising - Future -->
+                    <div class="status-step">
+                        <div class="status-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 3v5h-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="status-label">Revising</span>
+                    </div>
+                    
+                    <!-- Editing - Future -->
+                    <div class="status-step">
+                        <div class="status-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 11l3 3L22 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="status-label">Editing</span>
+                    </div>
+                    
+                    <!-- Publishing - Future -->
+                    <div class="status-step">
+                        <div class="status-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="status-label">Publishing</span>
+                    </div>
+                    
+                    <!-- Published - Future -->
+                    <div class="status-step">
+                        <div class="status-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M22 4L12 14.01l-3-3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span class="status-label">Published</span>
+                    </div>
+                </div>
+                
+                <div class="status-details">
+                    <div class="status-metric">
+                        <span class="metric-value">45,000</span>
+                        <span class="metric-label">Words Written</span>
+                    </div>
+                    <div class="status-metric">
+                        <span class="metric-value">150,000</span>
+                        <span class="metric-label">Target Words</span>
+                    </div>
+                    <div class="status-metric">
+                        <span class="metric-value">Drafting</span>
+                        <span class="metric-label">Current Stage</span>
+                    </div>
+                    <div class="status-metric">
+                        <span class="metric-value">2025</span>
+                        <span class="metric-label">Est. Release</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Troubleshooting</h2>
+        <div class="step">
+            <h3>Problem: Tracker doesn't appear</h3>
+            <p><strong>Check:</strong></p>
+            <ul>
+                <li>Is <code>stageProgress</code> defined as a number in your book data?</li>
+                <li>Did you copy all the CSS including <code>.book-status-tracker</code>?</li>
+                <li>Open browser console (F12) - any JavaScript errors?</li>
+            </ul>
+
+            <h3>Problem: Stages don't line up horizontally</h3>
+            <p><strong>Fix:</strong></p>
+            <ul>
+                <li>Check that <code>.status-timeline</code> has <code>display: flex</code></li>
+                <li>Ensure <code>width: 100%</code> is set on the timeline</li>
+                <li>Make sure parent container isn't too narrow</li>
+            </ul>
+
+            <h3>Problem: Progress bar doesn't show</h3>
+            <p><strong>Fix:</strong></p>
+            <ul>
+                <li>Verify <code>position: absolute</code> on <code>.status-progress-bar</code></li>
+                <li>Check that <code>z-index: 1</code> is set (needs to be above background line)</li>
+                <li>Ensure width is being calculated correctly (check with browser inspector)</li>
+            </ul>
+        </div>
+
+        <h2>Quick Reference: Progress Calculation</h2>
+        <div class="step">
+            <pre><code>// Example: Book is 30% through Drafting
+currentStage = "Drafting"          // Stage 2 (index 1)
+stageProgress = 30                 // 30% done with Drafting
+
+// Calculation:
+stagesCompleted = 1                // Prewriting is done
+progressInStage = 0.3              // 30% as decimal
+overallProgress = (1 + 0.3) / 6 * 100
+                = 1.3 / 6 * 100
+                = 21.67%           // Rounded to 22%</code></pre>
+        </div>
+
+        <div class="intro" style="margin-top: 3rem;">
+            <p><strong>🎉 You're all set!</strong> Your progress tracker should now be working beautifully. As you update <code>currentStage</code> and <code>stageProgress</code>, the visualization will automatically update to show your writing journey.</p>
+        </div>
+
+        <a href="#" class="button">Back to Top ↑</a>
+    </div>
+</body>
+</html>

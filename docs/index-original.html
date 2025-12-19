@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sid Lancaster - Fantasy Author</title>
+    <link rel="icon" href="Logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="particles" id="particles">
+        <div class="particle-layer" data-speed="-0.8"></div>
+        <div class="particle-layer" data-speed="-0.65"></div>
+        <div class="particle-layer" data-speed="-0.5"></div>
+        <div class="particle-layer" data-speed="-0.35"></div>
+        <div class="particle-layer" data-speed="-0.2"></div>
+    </div>
+
+    <nav>
+        <div class="logo">
+            <a href="#hero">
+                <img src="Logo.png" alt="Sid Lancaster">
+            </a>
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+        <ul class="nav-links">
+            <li>
+                <a class="nav-btn" href="#about">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-btn" href="#books">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 7a4 4 0 0 1 4-4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a4 4 0 0 1-4-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <path d="M22 7a2 2 0 0 0-2-2H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <span>Books</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-btn" href="#news">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l4 4v10a2 2 0 0 1-2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <path d="M7 10h6M7 14h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                    </svg>
+                    <span>News</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-btn" href="#newsletter">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <span>Newsletter</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-btn" href="#connect">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <span>Connect</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <section id="hero" class="hero">
+        <h1>Sid Lancaster</h1>
+        <p class="tagline">Building tales of magic, intrigue, and worlds beyond imagination</p>
+        <a href="#books" class="cta">Explore My Worlds</a>
+    </section>
+
+    <section id="about">
+        <div class="about-container">
+            <h2>About the Author</h2>
+            <div class="about-text">
+                <p>Sid Lancaster crafts immersive fantasy and science fiction that transports readers to worlds where magic pulses through city streets, ancient powers awaken, and the powerless rise to challenge empires and gods.</p>
+                <p>Specializing in urban fantasy, epic fantasy, and supernatural tales with unique settings, Sid writes for young adult and adult audiences who crave stories that blur the line between the extraordinary and reality.</p>
+                <p>When not building new worlds, Sid is plotting the next chapter in the ongoing saga of servants, empires, and the twilight of suns.</p>
+            </div>
+            <div class="about-photo">
+                <img src="author-photo.jpg" alt="Sid Lancaster">
+            </div>
+        </div>
+    </section>
+
+    <section id="books">
+        <div class="section-header">
+            <h2>Books and Series</h2>
+            <p>Stories of magic, intrigue, and worlds where servants rise to challenge empires</p>
+        </div>
+
+        <div class="carousel-container">
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Books will be generated here -->
+                </div>
+            </div>
+
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="prevBtn" aria-label="Previous book">←</button>
+                <div class="carousel-indicators" id="indicators"></div>
+                <button class="carousel-btn" id="nextBtn" aria-label="Next book">→</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="news" class="news-section">
+        <h2>News & Updates</h2>
+        <div class="news-container">
+            <div class="news-filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="progress">Book Progress</button>
+                <button class="filter-btn" data-category="event">Events</button>
+                <button class="filter-btn" data-category="behind-scenes">Behind the Scenes</button>
+                <button class="filter-btn" data-category="spotlight">Reader Spotlight</button>
+            </div>
+
+            <div class="news-carousel-wrapper">
+                <button class="news-carousel-btn news-prev" id="newsPrevBtn" aria-label="Previous posts">←</button>
+                <div class="news-grid" id="newsGrid">
+                    <!-- News posts will be generated here -->
+                </div>
+                <button class="news-carousel-btn news-next" id="newsNextBtn" aria-label="Next posts">→</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="newsletter">
+        <div class="newsletter-container">
+            <h2>Join the Journey</h2>
+            <p>Subscribe to receive updates on new releases, book progress, exclusive content, and behind-the-scenes glimpses into the worlds I'm building.</p>
+            <form class="newsletter-form" onsubmit="return false;">
+                <input type="email" placeholder="Your email address" required style="max-height: 55px">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="connect" class="social-section">
+        <h2>Connect With Me</h2>
+        <div class="social-buttons">
+            <a href="#" class="social-btn" title="Facebook" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M9.198 21.5h4v-8.01h3.604l.396-3.98h-4V7.5a1 1 0 0 1 1-1h3v-4h-3a5 5 0 0 0-5 5v2.01h-2l-.396 3.98h2.396v8.01Z"/></svg>
+            </a>
+            <a href="#" class="social-btn" title="Instagram" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3Z"/></svg>
+            </a>
+            <a href="#" class="social-btn" title="X (Twitter)" aria-label="X">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" class="social-btn" title="YouTube" aria-label="YouTube">
+                <svg viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg>
+            </a>
+            <a href="#" class="social-btn" title="TikTok" aria-label="TikTok">
+                <svg viewBox="0 0 24 24"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sid Lancaster. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
