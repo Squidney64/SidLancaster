@@ -4,7 +4,7 @@
 
 ```
 Personal Site/
-├── public/              # Document root - set this as your web server root
+├── docs/                # GitHub Pages document root
 │   ├── index.html       # Home page
 │   ├── books.html       # All books page
 │   ├── news.html        # News page
@@ -18,26 +18,35 @@ Personal Site/
 └── assets/              # Images and static assets
 ```
 
+## GitHub Pages Setup
+
+This site is published via GitHub Pages from the `/docs` folder.
+
+**GitHub Pages Settings:**
+- Source: Deploy from branch `main`
+- Folder: `/docs`
+- Custom domain: `sidlancaster.com`
+
 ## URL Structure
 
-With `public/` set as the document root, your URLs will be clean:
-- Home: `yoursite.com/`
-- Books: `yoursite.com/books.html`
-- News: `yoursite.com/news.html`
-- Series: `yoursite.com/series.html`
-- Individual books: `yoursite.com/books/book-name.html`
-- Individual series: `yoursite.com/series/series-name.html`
+Clean URLs without folder prefixes:
+- Home: `sidlancaster.com/`
+- Books: `sidlancaster.com/books.html`
+- News: `sidlancaster.com/news.html`
+- Series: `sidlancaster.com/series.html`
+- Individual books: `sidlancaster.com/books/book-name.html`
+- Individual series: `sidlancaster.com/series/series-name.html`
 
 ## Local Development
 
-To test locally, set your web server's document root to the `public/` folder.
+To test locally, set your web server's document root to the `docs/` folder.
 
 **Using Python:**
 ```bash
-cd "c:\Users\sidla\Desktop\Personal Site\public"
+cd "c:\Users\sidla\Desktop\Personal Site\docs"
 python -m http.server 8000
 ```
 Then visit: `http://localhost:8000`
 
 **Using Live Server in VS Code:**
-- Right-click on `public/index.html` and select "Open with Live Server"
+- Right-click on `docs/index.html` and select "Open with Live Server"
