@@ -16,7 +16,15 @@
       "Bash(for file in \"c:\\Users\\sidla\\Desktop\\Personal Site\\public\\books\"/*.html)",
       "Bash(do sed -i 's|href=\"\"../../index.html\"\"|href=\"\"../index.html\"\"|g; s|href=\"\"../../index.html#|href=\"\"../index.html#|g' \"$file\")",
       "Bash(for file in \"c:\\Users\\sidla\\Desktop\\Personal Site\\public\\series\"/*.html)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(cat:*)",
+      "Bash(git -C \"c:\\\\Users\\\\sidla\\\\Desktop\\\\Personal Site\" remote -v)",
+      "Bash(git -C \"c:\\\\Users\\\\sidla\\\\Desktop\\\\Personal Site\" config -l)",
+      "Bash(git -C \"c:\\\\Users\\\\sidla\\\\Desktop\\\\Personal Site\" ls-files)",
+      "Bash(git -C \"c:\\\\Users\\\\sidla\\\\Desktop\\\\Personal Site\" log --oneline -10)",
+      "Bash(git add:*)",
+      "Bash(git rm:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nConfigure GitHub Pages to serve from public folder\n\n- Move CNAME file to public/ directory\n- Add .nojekyll to skip Jekyll processing\n- Enables clean URLs without /public/ prefix\n\nAfter this commit, update GitHub Pages settings:\nRepository Settings → Pages → Source: Deploy from branch\nBranch: main, Folder: /public\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ],
     "deny": [],
     "ask": []
