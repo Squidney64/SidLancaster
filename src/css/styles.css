@@ -4869,12 +4869,11 @@ footer {
 
 .series-hero.severance-chronicles {
     background:
-        linear-gradient(135deg, rgba(10, 24, 33, 0.75), rgba(20, 30, 40, 0.85)),
-        url('../../assets/images/Immaria.png');
+        linear-gradient(135deg, rgba(10, 24, 33, 0.85), rgba(20, 30, 40, 0.9)),
+        url('../../assets/images/mountain1.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
 }
 
 /* Enhanced overlay for all custom backgrounds */
