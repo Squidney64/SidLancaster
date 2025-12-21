@@ -10,12 +10,14 @@ Personal Site/
 │   ├── news.html        # News page
 │   ├── series.html      # All series page
 │   ├── books/           # Individual book pages
-│   └── series/          # Individual series pages
-├── src/
-│   ├── css/             # Stylesheets
-│   ├── js/              # JavaScript files
-│   └── data/            # Data files
-└── assets/              # Images and static assets
+│   ├── series/          # Individual series pages
+│   ├── src/             # CSS, JavaScript, and data files
+│   │   ├── css/
+│   │   ├── js/
+│   │   └── data/
+│   └── assets/          # Images and static assets
+│       └── images/
+└── README.md
 ```
 
 ## GitHub Pages Setup
