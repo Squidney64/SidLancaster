@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
         renderSeriesBooks(series);
         renderSeriesNews(series);
     }
+
+    // Initialize parallax effect for hero backgrounds
+    initializeParallax();
 });
 
 // Render enhanced series hero section
@@ -366,4 +369,25 @@ function renderSeriesNews(series) {
             </article>
         `;
     }).join('');
+}
+
+function initializeParallax() {
+    const heroSections = document.querySelectorAll('.book-hero, .series-hero');
+
+    if (heroSections.length === 0) return;
+
+    window.addEventListener('scroll', () => {
+        heroSections.forEach(hero => {
+            const scrolled = window.pageYOffset;
+            const heroTop = hero.offsetTop;
+            const heroHeight = hero.offsetHeight;
+
+            // Only apply parallax when the hero is in view
+            if (scrolled < heroTop + heroHeight) {
+                // Move background at 50% of scroll speed (slower than page scroll)
+                const yPos = (scrolled - heroTop) * 0.5;
+                hero.style.backgroundPosition = `center ${yPos}px`;
+            }
+        });
+    });
 }

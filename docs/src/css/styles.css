@@ -4839,10 +4839,12 @@ footer {
     background:
         linear-gradient(135deg, rgba(10, 24, 33, 0.75), rgba(20, 30, 40, 0.85)),
         url('../../assets/images/sentinel_earth.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-size: 120%;
+    background-position: center center;
+    background-attachment: scroll;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
 }
 
 .book-hero.burning-of-golandra,
@@ -4850,10 +4852,12 @@ footer {
     background:
         linear-gradient(135deg, rgba(10, 24, 33, 0.75), rgba(20, 30, 40, 0.85)),
         url('../../assets/images/golandra.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-size: 120%;
+    background-position: center center;
+    background-attachment: scroll;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
 }
 
 .book-hero.day-when-servants-reign,
@@ -4861,19 +4865,23 @@ footer {
     background:
         linear-gradient(135deg, rgba(10, 24, 33, 0.75), rgba(20, 30, 40, 0.85)),
         url('../../assets/images/Immaria.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-size: 120%;
+    background-position: center center;
+    background-attachment: scroll;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
 }
 
 .series-hero.severance-chronicles {
     background:
         linear-gradient(135deg, rgba(10, 24, 33, 0.85), rgba(20, 30, 40, 0.9)),
         url('../../assets/images/Immaria.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-size: 120%;
+    background-position: center center;
+    background-attachment: scroll;
+    position: relative;
+    overflow: hidden;
 }
 
 /* Enhanced overlay for all custom backgrounds */
