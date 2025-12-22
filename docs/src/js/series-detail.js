@@ -264,7 +264,7 @@ function renderSeriesBooks(series) {
 
         return `
             <article class="series-book-card-enhanced">
-                <a href="../books/${book.slug}.html">
+                <a href="/books/${book.slug}">
                     <div class="book-card-header">
                         <div class="book-number-large">${index + 1}</div>
                         <div class="book-status-badge ${book.published ? 'published' : book.currentStage?.toLowerCase() || 'drafting'}">
@@ -357,7 +357,7 @@ function renderSeriesNews(series) {
                 <div class="post-date">${post.dateFormatted}</div>
                 <h3 class="post-title">${post.title}</h3>
                 <p class="post-excerpt">${post.excerpt}</p>
-                <a href="../news/${post.slug}.html" class="post-link">
+                <a href="/news/${post.slug}" class="post-link">
                     Read More
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

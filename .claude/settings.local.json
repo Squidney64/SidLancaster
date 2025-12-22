@@ -26,7 +26,8 @@
       "Bash(git rm:*)",
       "Bash(git commit -m \"$\\(cat <<''EOF''\nConfigure GitHub Pages to serve from public folder\n\n- Move CNAME file to public/ directory\n- Add .nojekyll to skip Jekyll processing\n- Enables clean URLs without /public/ prefix\n\nAfter this commit, update GitHub Pages settings:\nRepository Settings → Pages → Source: Deploy from branch\nBranch: main, Folder: /public\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git reset:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nRemove .html extensions from all hyperlinks\n\n- Update all HTML files to use clean URLs without .html\n- Homepage links now point to \"/\" instead of \"index.html\"\n- Update all JavaScript-generated links\n- Enables cleaner URLs \\(e.g., /books/title instead of /books/title.html\\)\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ],
     "deny": [],
     "ask": []

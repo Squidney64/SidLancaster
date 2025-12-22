@@ -76,7 +76,7 @@ function renderBooks() {
 
         return `
         <article class="book-card-new" data-status="${book.statusCategory}">
-            <a href="books/${book.slug}.html" class="book-card-link-new">
+            <a href="/books/${book.slug}" class="book-card-link-new">
                 <!-- Book Cover Section -->
                 <div class="book-cover-section">
                     <div class="book-cover-art">

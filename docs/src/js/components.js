@@ -9,8 +9,8 @@ function createNavigation(currentPage = 'home', basePath = '') {
     return `
     <nav>
         <div class="logo">
-            <a href="${basePath}index.html">
-                <img src="${basePath}assets/images/Logo.png" alt="Sid Lancaster">
+            <a href="${basePath ? basePath : '/'}">
+                <img src="${basePath}assets/images/logo.png" alt="Sid Lancaster">
             </a>
         </div>
         <button class="mobile-menu-toggle" aria-label="Toggle menu">
@@ -22,7 +22,7 @@ function createNavigation(currentPage = 'home', basePath = '') {
         </button>
         <ul class="nav-links">
             <li>
-                <a class="nav-btn ${isActive('home')}" href="${basePath}index.html">
+                <a class="nav-btn ${isActive('home')}" href="${basePath ? basePath : '/'}">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                         <polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -31,7 +31,7 @@ function createNavigation(currentPage = 'home', basePath = '') {
                 </a>
             </li>
             <li class="nav-dropdown">
-                <a class="nav-btn ${isActive('books')}" href="${basePath}public/books.html">
+                <a class="nav-btn ${isActive('books')}" href="${basePath}books">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 7a4 4 0 0 1 4-4h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a4 4 0 0 1-4-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                         <path d="M22 7a2 2 0 0 0-2-2H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -42,15 +42,15 @@ function createNavigation(currentPage = 'home', basePath = '') {
                     </svg>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="${basePath}public/books.html">All Books</a></li>
+                    <li><a href="${basePath}books">All Books</a></li>
                     <li class="divider"></li>
                     ${typeof booksData !== 'undefined' ? Object.values(booksData).map(book =>
-                        `<li><a href="${basePath}public/books/${book.slug}.html">${book.title}</a></li>`
-                    ).join('') : `<li><a href="${basePath}public/books/the-day-when-servants-reign.html">The Day When Servants Reign</a></li>`}
+                        `<li><a href="${basePath}books/${book.slug}">${book.title}</a></li>`
+                    ).join('') : `<li><a href="${basePath}books/the-day-when-servants-reign">The Day When Servants Reign</a></li>`}
                 </ul>
             </li>
             <li class="nav-dropdown">
-                <a class="nav-btn ${isActive('series')}" href="${basePath}public/series.html">
+                <a class="nav-btn ${isActive('series')}" href="${basePath}series">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -62,15 +62,15 @@ function createNavigation(currentPage = 'home', basePath = '') {
                     </svg>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="${basePath}public/series.html">All Series</a></li>
+                    <li><a href="${basePath}series">All Series</a></li>
                     <li class="divider"></li>
                     ${typeof seriesData !== 'undefined' ? Object.values(seriesData).map(series =>
-                        `<li><a href="${basePath}public/series/${series.slug}.html">${series.name}</a></li>`
-                    ).join('') : `<li><a href="${basePath}public/series/severance-chronicles.html">Severance Chronicles</a></li>`}
+                        `<li><a href="${basePath}series/${series.slug}">${series.name}</a></li>`
+                    ).join('') : `<li><a href="${basePath}series/severance-chronicles">Severance Chronicles</a></li>`}
                 </ul>
             </li>
             <li>
-                <a class="nav-btn ${isActive('news')}" href="${basePath}public/news.html">
+                <a class="nav-btn ${isActive('news')}" href="${basePath}news">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l4 4v10a2 2 0 0 1-2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                         <path d="M7 10h6M7 14h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
@@ -79,7 +79,7 @@ function createNavigation(currentPage = 'home', basePath = '') {
                 </a>
             </li>
             <li>
-                <a class="nav-btn ${isActive('about')}" href="${basePath}index.html#about">
+                <a class="nav-btn ${isActive('about')}" href="${basePath ? basePath + '#about' : '/#about'}">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                         <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -88,7 +88,7 @@ function createNavigation(currentPage = 'home', basePath = '') {
                 </a>
             </li>
             <li>
-                <a class="nav-btn ${isActive('newsletter')}" href="${basePath}index.html#newsletter">
+                <a class="nav-btn ${isActive('newsletter')}" href="${basePath ? basePath + '#newsletter' : '/#newsletter'}">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
                         <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -120,11 +120,11 @@ function createFooter() {
     <footer>
         <div class="footer-content">
             <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="news.html">News</a>
-                <a href="about.html">About</a>
-                <a href="#newsletter">Newsletter</a>
-                <a href="#privacy">Privacy</a>
+                <a href="/">Home</a>
+                <a href="/news">News</a>
+                <a href="/#about">About</a>
+                <a href="/#newsletter">Newsletter</a>
+                <a href="/#privacy">Privacy</a>
             </div>
             <div class="social-links-footer">
                 <a href="#" class="social-link" title="Facebook" aria-label="Facebook">
@@ -183,7 +183,7 @@ function createBreadcrumb(items) {
 function createBookCard(book, size = 'medium') {
     return `
     <div class="book-card-preview ${size}">
-        <a href="books/${book.slug}.html" class="book-card-link">
+        <a href="/books/${book.slug}" class="book-card-link">
             <div class="book-cover-mini">
                 <svg class="book-cover-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke-width="2" stroke-linecap="round"/>
@@ -217,7 +217,7 @@ function createNewsPostCard(post, size = 'regular') {
         <div class="post-meta">
             <span class="reading-time">${post.readingTime} min read</span>
         </div>
-        <a href="news/${post.slug}.html" class="post-link">
+        <a href="/news/${post.slug}" class="post-link">
             Read More
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -241,10 +241,7 @@ function populateNavigationDropdowns() {
             // Add books from data
             booksList.forEach(book => {
                 const li = document.createElement('li');
-                const basePath = window.location.pathname.includes('/books/') ||
-                                 window.location.pathname.includes('/series/') ||
-                                 window.location.pathname.includes('/news/') ? '../' : '';
-                li.innerHTML = `<a href="${basePath}books/${book.slug}.html">${book.title}</a>`;
+                li.innerHTML = `<a href="/books/${book.slug}">${book.title}</a>`;
                 booksDropdown.appendChild(li);
             });
         }
@@ -266,10 +263,7 @@ function populateNavigationDropdowns() {
                     // Add series from data
                     seriesList.forEach(series => {
                         const li = document.createElement('li');
-                        const basePath = window.location.pathname.includes('/books/') ||
-                                         window.location.pathname.includes('/series/') ||
-                                         window.location.pathname.includes('/news/') ? '../' : '';
-                        li.innerHTML = `<a href="${basePath}series/${series.slug}.html">${series.name}</a>`;
+                        li.innerHTML = `<a href="/series/${series.slug}">${series.name}</a>`;
                         seriesMenu.appendChild(li);
                     });
                 }

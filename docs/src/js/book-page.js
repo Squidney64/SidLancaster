@@ -54,7 +54,7 @@ function renderBookHero(book) {
         <div class="book-hero-info">
             <div class="book-hero-badges">
                 <span class="book-badge series">${book.seriesNumber}</span>
-                ${series ? `<a href="../series/${series.slug}.html" class="book-badge badge-link">${series.name}</a>` : `<span class="book-badge">${book.seriesName}</span>`}
+                ${series ? `<a href="/series/${series.slug}" class="book-badge badge-link">${series.name}</a>` : `<span class="book-badge">${book.seriesName}</span>`}
             </div>
             <h1 class="book-hero-title">${book.title}</h1>
             <p class="book-hero-synopsis">${book.synopsis}</p>
@@ -307,7 +307,7 @@ function renderProgressTab(book) {
 
             <div class="progress-updates">
                 <h3>Recent Updates</h3>
-                <p class="updates-cta">Check the <a href="../news.html">News page</a> for the latest writing progress updates!</p>
+                <p class="updates-cta">Check the <a href="/news">News page</a> for the latest writing progress updates!</p>
             </div>
         </div>
     `;
@@ -341,7 +341,7 @@ function renderRelatedNews(book) {
                 <div class="post-meta">
                     <span class="reading-time">${post.readingTime} min read</span>
                 </div>
-                <a href="../news/${post.slug}.html" class="post-link">
+                <a href="/news/${post.slug}" class="post-link">
                     Read More
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
