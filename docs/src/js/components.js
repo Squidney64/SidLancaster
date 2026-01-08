@@ -309,10 +309,21 @@ function initializeSharedComponents() {
         const toggle = dropdown.querySelector('.nav-btn');
         const menu = dropdown.querySelector('.dropdown-menu');
 
-        toggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            dropdown.classList.toggle('active');
-        });
+        if (toggle) {
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Close other dropdowns
+                dropdowns.forEach(other => {
+                    if (other !== dropdown) {
+                        other.classList.remove('active');
+                    }
+                });
+
+                dropdown.classList.toggle('active');
+            });
+        }
 
         // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
