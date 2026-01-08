@@ -1531,7 +1531,39 @@ footer {
     }
 }
 
-@media (max-width: 1024px) {
+/* Icon-only navigation state */
+@media (max-width: 900px) {
+    /* Hide button text, show only icons */
+    .nav-btn span {
+        display: none;
+    }
+
+    /* Make buttons more compact for icon-only display */
+    .nav-btn {
+        padding: 0.6rem;
+        min-width: 44px;
+        border-radius: 50%;
+    }
+
+    .nav-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Keep dropdown arrows visible in icon-only mode for clarity */
+    .nav-dropdown > .nav-btn {
+        gap: 0.3rem;
+        padding: 0.5rem 0.7rem;
+        border-radius: 30px;
+    }
+
+    .dropdown-icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 768px) {
     /* Mobile menu */
     .mobile-menu-toggle {
         display: flex !important;
@@ -1566,6 +1598,7 @@ footer {
         width: 100%;
     }
 
+    /* Override icon-only styles for mobile menu */
     .nav-btn {
         width: 100%;
         justify-content: flex-start;
@@ -1574,6 +1607,12 @@ footer {
         border-bottom: 1px solid rgba(78, 205, 196, 0.1);
         padding: 1rem 1.5rem;
         background: transparent;
+        min-width: auto;
+    }
+
+    /* Show text again in mobile menu */
+    .nav-btn span {
+        display: inline !important;
     }
 
     .nav-btn:hover {
@@ -1607,35 +1646,19 @@ footer {
         padding: 0.85rem 1.5rem 0.85rem 3rem;
     }
 
-    .book-card {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 2rem;
+    /* Show dropdown arrows in mobile menu */
+    .nav-dropdown > .nav-btn svg:last-child {
+        display: block !important;
     }
 
-    .book-cover-container {
-        max-width: 250px;
-        width: 100%;
-    }
-
-    .book-cover {
-        width: 100%;
-        aspect-ratio: 2/3;
-    }
-
-    .characters-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
     section {
         padding: 5rem 3% 2.5rem;
     }
 
     .book-card {
-        padding: 1.5rem;
+        grid-template-columns: 1fr;
         gap: 1.5rem;
+        padding: 1.5rem;
     }
 
     .book-cover-container {
