@@ -1531,7 +1531,7 @@ footer {
 @media (max-width: 1024px) {
     /* Mobile menu */
     .mobile-menu-toggle {
-        display: flex;
+        display: flex !important;
     }
 
     .nav-links {
@@ -1612,6 +1612,8 @@ footer {
 
     .book-cover {
         max-width: 250px;
+        aspect-ratio: 2/3;
+        width: 100%;
     }
 
     .characters-grid {
