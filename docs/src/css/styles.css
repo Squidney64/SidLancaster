@@ -384,11 +384,14 @@ section {
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
 }
 
 .book-cover {
     width: 100%;
-    max-width: 300px;
     aspect-ratio: 2/3;
     background: linear-gradient(135deg, rgba(26, 47, 63, 0.8), rgba(10, 24, 33, 0.8));
     border: 2px solid var(--accent-dark-teal);
@@ -396,7 +399,7 @@ section {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     transition: all var(--transition-med);
@@ -1610,10 +1613,14 @@ footer {
         padding: 2rem;
     }
 
-    .book-cover {
+    .book-cover-container {
         max-width: 250px;
-        aspect-ratio: 2/3;
         width: 100%;
+    }
+
+    .book-cover {
+        width: 100%;
+        aspect-ratio: 2/3;
     }
 
     .characters-grid {
@@ -1631,15 +1638,14 @@ footer {
         gap: 1.5rem;
     }
 
-    .book-cover {
+    .book-cover-container {
         max-width: 200px;
-        aspect-ratio: 2/3;
         width: 100%;
     }
 
-    .book-cover-container {
-        max-width: 200px;
-        margin: 0 auto;
+    .book-cover {
+        width: 100%;
+        aspect-ratio: 2/3;
     }
 
     .book-meta-info {
@@ -1680,15 +1686,14 @@ footer {
         gap: 1rem;
     }
 
-    .book-cover {
+    .book-cover-container {
         max-width: 160px;
-        aspect-ratio: 2/3;
         width: 100%;
     }
 
-    .book-cover-container {
-        max-width: 160px;
-        margin: 0 auto;
+    .book-cover {
+        width: 100%;
+        aspect-ratio: 2/3;
     }
 
     .book-title {
