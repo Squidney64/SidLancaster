@@ -72,14 +72,19 @@ function syncParticleLayerHeights() {
 }
 
 function calculateCapMoteCount() {
-    const pixelsPerMote = 800 * 800; // Increased for better performance
+    // Check if we're on the Burning of Golandra page
+    const isGolandraPage = window.location.pathname.includes('burning-of-golandra');
+
+    // Double particles on all pages except Burning of Golandra
+    const pixelsPerMote = isGolandraPage ? (800 * 800) : (400 * 800);
+
     const pageArea = document.documentElement.scrollWidth * document.documentElement.scrollHeight;
     const motePerLayer = Math.floor(pageArea / pixelsPerMote);
     capMoteCount = motePerLayer * particleLayers.length;
     return capMoteCount;
 }
 
-function createRandomDrift(index) {
+function createRandomDrift(index, driftMultiplier = 1) {
     const keyframeName = `drift${index}`;
 
     // Check if we already created this animation
@@ -87,12 +92,19 @@ function createRandomDrift(index) {
         return keyframeName;
     }
 
+    // Base drift values - Layer 2 uses multiplier of 1
+    const baseDriftX = 60;
+    const baseDriftY = 40;
+
+    const driftX = baseDriftX * driftMultiplier;
+    const driftY = baseDriftY * driftMultiplier;
+
     const keyframes = `
         @keyframes ${keyframeName} {
             0% { transform: translate(0, 0); }
-            25% { transform: translate(${Math.random() * 60 - 30}px, ${Math.random() * 40 - 20}px); }
-            50% { transform: translate(${Math.random() * 60 - 30}px, ${Math.random() * 40 - 20}px); }
-            75% { transform: translate(${Math.random() * 60 - 30}px, ${Math.random() * 40 - 20}px); }
+            25% { transform: translate(${Math.random() * driftX - driftX/2}px, ${Math.random() * driftY - driftY/2}px); }
+            50% { transform: translate(${Math.random() * driftX - driftX/2}px, ${Math.random() * driftY - driftY/2}px); }
+            75% { transform: translate(${Math.random() * driftX - driftX/2}px, ${Math.random() * driftY - driftY/2}px); }
             100% { transform: translate(0, 0); }
         }
     `;
@@ -109,11 +121,27 @@ function createMote(layer, layerIndex) {
     const mote = document.createElement('div');
     mote.className = 'mote';
 
-    const minSize = 3 + (10 / layerIndex);
-    const maxSize = 8 + (20 / layerIndex);
+    // Calculate size based on layer - background layers (0, 1) are smallest, foreground layers are largest
+    const totalLayers = particleLayers.length;
+    const depthFactor = layerIndex / (totalLayers - 1); // 0 (back) to 1 (front)
+    const minSize = 2 + (depthFactor * 8);
+    const maxSize = 5 + (depthFactor * 18);
     const size = minSize + Math.random() * (maxSize - minSize);
-    const color = moteColors[Math.floor(Math.random() * moteColors.length)];
-    const driftAnimation = createRandomDrift(moteIndex++);
+
+    // Calculate opacity based on layer - furthest layers (0, 1) are 0.15-0.4, nearest layer (6) is 0.5-0.8
+    const minOpacity = 0.15 + (depthFactor * 0.35); // 0.15 (back) to 0.5 (front)
+    const maxOpacity = 0.4 + (depthFactor * 0.4); // 0.4 (back) to 0.8 (front)
+    const opacity = minOpacity + Math.random() * (maxOpacity - minOpacity);
+
+    // Get random base color and apply layer-based opacity
+    const baseColor = moteColors[Math.floor(Math.random() * moteColors.length)];
+    const colorMatch = baseColor.match(/rgba\((\d+),\s*(\d+),\s*(\d+),/);
+    const color = `rgba(${colorMatch[1]}, ${colorMatch[2]}, ${colorMatch[3]}, ${opacity})`;
+
+    // Calculate drift multiplier - Layer 2 = 1.0, scales from 0.3 (layer 0) to 2.0 (layer 6)
+    // Formula: Layer 2 stays at 1.0, further layers get less, nearer layers get more
+    const driftMultiplier = 0.3 + (depthFactor * 1.7);
+    const driftAnimation = createRandomDrift(moteIndex++, driftMultiplier);
     const duration = 40 + Math.random() * 30;
     const fadeInDuration = 2;
     const fadeOutDuration = 3;
