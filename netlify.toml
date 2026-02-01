@@ -1,0 +1,49 @@
+# Netlify configuration
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Publish directory - where the site files are located
+  publish = "docs"
+
+# Enable pretty URLs - serve .html files without the extension
+[[redirects]]
+  from = "/books"
+  to = "/books.html"
+  status = 200
+
+[[redirects]]
+  from = "/series"
+  to = "/series.html"
+  status = 200
+
+[[redirects]]
+  from = "/news"
+  to = "/news.html"
+  status = 200
+
+[[redirects]]
+  from = "/demo"
+  to = "/demo.html"
+  status = 200
+
+# Handle book detail pages - clean URLs for individual books
+[[redirects]]
+  from = "/books/the-day-when-servants-reign"
+  to = "/books/the-day-when-servants-reign.html"
+  status = 200
+
+[[redirects]]
+  from = "/books/burning-of-golandra"
+  to = "/books/burning-of-golandra.html"
+  status = 200
+
+[[redirects]]
+  from = "/books/the-documents-of-martialis"
+  to = "/books/the-documents-of-martialis.html"
+  status = 200
+
+# Handle series detail pages - clean URLs for individual series
+[[redirects]]
+  from = "/series/severance-chronicles"
+  to = "/series/severance-chronicles.html"
+  status = 200
