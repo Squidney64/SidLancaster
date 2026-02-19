@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Severance Chronicles - Epic Fantasy Series by Sid Lancaster</title>
-    <meta name="description" content="The Severance Chronicles: An epic fantasy series exploring power, freedom, and destiny in a world beneath a dying sun.">
+    <title id="pageTitle">Blog Post - Sid Lancaster</title>
+    <meta name="description" id="pageDescription" content="A blog post from Sid Lancaster, fantasy author.">
     <link rel="icon" href="../assets/images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../src/css/styles.css">
 </head>
@@ -58,7 +58,7 @@
                 </ul>
             </li>
             <li class="nav-dropdown">
-                <a class="nav-btn active" href="/series">
+                <a class="nav-btn" href="/series">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -71,11 +71,11 @@
                 <ul class="dropdown-menu">
                     <li><a href="/series">All Series</a></li>
                     <li class="divider"></li>
-                    <li><a href="severance-chronicles.html">Severance Chronicles</a></li>
+                    <li><a href="/series/severance-chronicles">Severance Chronicles</a></li>
                 </ul>
             </li>
             <li>
-                <a class="nav-btn" href="/blog">
+                <a class="nav-btn active" href="/blog">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l4 4v10a2 2 0 0 1-2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                         <path d="M7 10h6M7 14h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
@@ -84,7 +84,7 @@
                 </a>
             </li>
             <li>
-                <a class="nav-btn" href="../index.html#about">
+                <a class="nav-btn" href="/#about">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                         <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -93,7 +93,7 @@
                 </a>
             </li>
             <li>
-                <a class="nav-btn" href="../index.html#newsletter">
+                <a class="nav-btn" href="/#newsletter">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
                         <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -104,76 +104,16 @@
         </ul>
     </nav>
 
-    <!-- BREADCRUMB -->
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-        <ol>
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/series">Series</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Severance Chronicles</li>
-        </ol>
-    </nav>
-
-    <!-- SERIES HERO -->
-    <section class="series-hero severance-chronicles">
-        <div class="section-header">
-            <h2>Severance Chronicles</h2>
-        </div>
-        <div class="series-hero-content" id="seriesHeroContent">
-            <!-- Will be populated by JavaScript -->
-        </div>
-    </section>
-
-    <!-- SERIES OVERVIEW -->
-    <section class="series-overview">
-        <div class="series-overview-container" id="seriesOverviewContainer">
-            <!-- Will be populated by JavaScript -->
-        </div>
-    </section>
-
-    <!-- BOOKS IN SERIES -->
-    <section id="series-books" class="series-books">
-        <div class="section-header">
-            <h2>Books in the Series</h2>
-            <p>Follow the reading order for the best experience</p>
-        </div>
-        <div class="books-grid" id="seriesBooksGrid">
-            <!-- Will be populated by JavaScript -->
-        </div>
-    </section>
-
-    <!-- LATEST SERIES NEWS -->
-    <section class="series-news">
-        <div class="section-header">
-            <h2>Latest Updates</h2>
-            <p>Recent news about the Severance Chronicles</p>
-        </div>
-        <div class="series-news-grid" id="seriesNewsGrid">
-            <!-- Will be populated by JavaScript -->
-        </div>
-        <div class="news-cta">
-            <a href="/news" class="btn btn-primary">View All News</a>
-        </div>
-    </section>
-
-    <!-- NEWSLETTER CTA -->
-    <section id="newsletter">
-        <div class="newsletter-container">
-            <h2>Follow the Severance Chronicles</h2>
-            <p>Get exclusive updates, early chapters, and behind-the-scenes content from the series.</p>
-            <form class="newsletter-form" onsubmit="return false;">
-                <input type="email" placeholder="Your email address" required>
-                <button type="submit">Subscribe</button>
-            </form>
-        </div>
-    </section>
+    <!-- POST CONTENT - rendered by JS -->
+    <div id="blogPostContent"></div>
 
     <footer>
         <div class="footer-content">
             <div class="footer-links">
                 <a href="/">Home</a>
                 <a href="/blog">Blog</a>
-                <a href="../index.html#about">About</a>
-                <a href="../index.html#newsletter">Newsletter</a>
+                <a href="/#about">About</a>
+                <a href="/#newsletter">Newsletter</a>
                 <a href="#privacy">Privacy</a>
             </div>
             <p class="copyright">&copy; 2026 Sid Lancaster. All rights reserved.</p>
@@ -183,6 +123,6 @@
     <script src="../src/data/data.js"></script>
     <script src="../src/js/components.js"></script>
     <script src="../src/js/script.js"></script>
-    <script src="../src/js/series-detail.js"></script>
+    <script src="../src/js/blog-post.js"></script>
 </body>
 </html>

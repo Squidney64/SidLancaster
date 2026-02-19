@@ -70,12 +70,12 @@ function createNavigation(currentPage = 'home', basePath = '') {
                 </ul>
             </li>
             <li>
-                <a class="nav-btn ${isActive('news')}" href="${basePath}news">
+                <a class="nav-btn ${isActive('blog')}" href="${basePath}blog">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l4 4v10a2 2 0 0 1-2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                         <path d="M7 10h6M7 14h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
                     </svg>
-                    <span>News</span>
+                    <span>Blog</span>
                 </a>
             </li>
             <li>
@@ -105,11 +105,11 @@ function createNavigation(currentPage = 'home', basePath = '') {
 function createParticleSystem() {
     return `
     <div class="particles" id="particles">
-        <div class="particle-layer" data-speed="-0.8"></div>
-        <div class="particle-layer" data-speed="-0.65"></div>
-        <div class="particle-layer" data-speed="-0.5"></div>
-        <div class="particle-layer" data-speed="-0.35"></div>
         <div class="particle-layer" data-speed="-0.2"></div>
+        <div class="particle-layer" data-speed="-0.35"></div>
+        <div class="particle-layer" data-speed="-0.5"></div>
+        <div class="particle-layer" data-speed="-0.65"></div>
+        <div class="particle-layer" data-speed="-0.8"></div>
     </div>
     `;
 }
@@ -121,7 +121,7 @@ function createFooter() {
         <div class="footer-content">
             <div class="footer-links">
                 <a href="/">Home</a>
-                <a href="/news">News</a>
+                <a href="/blog">Blog</a>
                 <a href="/#about">About</a>
                 <a href="/#newsletter">Newsletter</a>
                 <a href="/#privacy">Privacy</a>
@@ -140,7 +140,7 @@ function createFooter() {
                     <svg viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg>
                 </a>
             </div>
-            <p class="copyright">&copy; 2025 Sid Lancaster. All rights reserved.</p>
+            <p class="copyright">&copy; 2026 Sid Lancaster. All rights reserved.</p>
         </div>
     </footer>
     `;
@@ -210,14 +210,14 @@ function createNewsPostCard(post, size = 'regular') {
     const highlightClass = post.highlight ? 'highlight' : '';
     return `
     <article class="news-post ${highlightClass} ${size}" data-category="${post.category}">
-        <span class="post-category ${post.category}">${post.category.replace('-', ' ')}</span>
+        <span class="post-category ${post.category}">${getCategoryLabel(post.category)}</span>
         <div class="post-date">${post.dateFormatted}</div>
         <h3 class="post-title">${post.title}</h3>
         <p class="post-excerpt">${post.excerpt}</p>
         <div class="post-meta">
             <span class="reading-time">${post.readingTime} min read</span>
         </div>
-        <a href="/news/${post.slug}" class="post-link">
+        <a href="/blog/${post.slug}" class="post-link">
             Read More
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -276,6 +276,9 @@ function populateNavigationDropdowns() {
 function initializeSharedComponents() {
     // Populate navigation dropdowns first
     populateNavigationDropdowns();
+
+    // Back to top button (site-wide)
+    initBackToTop();
 
     // Mobile menu toggle - COMPLETELY REWRITTEN
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
@@ -386,6 +389,44 @@ function initializeSharedComponents() {
                 dropdown.classList.remove('active');
             });
         }
+    });
+}
+
+// ============================================
+// BACK TO TOP — injected globally on every page
+// ============================================
+
+function initBackToTop() {
+    // Don't double-inject (blog.html has a static one; skip if already present)
+    if (document.getElementById('backToTop')) {
+        // Still wire it up if it exists but hasn't been wired
+        _wireBackToTop(document.getElementById('backToTop'));
+        return;
+    }
+
+    const btn = document.createElement('button');
+    btn.id = 'backToTop';
+    btn.className = 'back-to-top';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M18 15l-6-6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`;
+    document.body.appendChild(btn);
+    _wireBackToTop(btn);
+}
+
+function _wireBackToTop(btn) {
+    // Avoid attaching duplicate scroll listeners
+    if (btn._backToTopWired) return;
+    btn._backToTopWired = true;
+
+    window.addEventListener('scroll', () => {
+        btn.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
 

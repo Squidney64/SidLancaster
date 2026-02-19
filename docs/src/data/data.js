@@ -344,6 +344,7 @@ const booksData = {
         series: "union-of-the-sentinels",
         seriesName: "The Union of the Sentinels",
         seriesNumber: "Book 1 of 3",
+        hidden: true,
 
         // Publication Info
         currentStage: "Drafting",
@@ -527,9 +528,10 @@ const booksData = {
         id: 2,
         slug: 'burning-of-golandra',
         title: "The Burning of Golandra",
-        series: null,
-        seriesName: null,
-        seriesNumber: null,
+        series: "severance-chronicles",
+        seriesName: "Severance Chronicles",
+        seriesNumber: "Book 2 of 4",
+        hidden: true,
 
         // Publication Info
         currentStage: "Prewriting",
@@ -666,8 +668,176 @@ const booksData = {
     }
 };
 
+// POST SERIES DATA
+// Each series groups ordered blog posts (e.g. a multi-part guide).
+// posts[] contains slugs in reading order.
+const postSeries = {
+    'mapmaking-guide': {
+        id: 'mapmaking-guide',
+        title: "The Worldbuilder's Map Guide",
+        description: 'A step-by-step series on drawing fantasy maps from scratch — tools, geography, and finishing techniques.',
+        posts: ['mapmaking-part-1', 'mapmaking-part-2', 'mapmaking-part-3']
+    }
+};
+
 // NEWS/UPDATES DATA
 const newsData = [
+    // ── Mapmaking Guide series (Part 1 is also featured) ─────────────────
+    {
+        id: 'mapmaking-part-1',
+        slug: 'mapmaking-part-1',
+        category: 'worldbuilding',
+        title: "The Worldbuilder's Map Guide, Part 1: Tools & Foundations",
+        date: '2025-02-10',
+        dateFormatted: 'February 10, 2025',
+        excerpt: 'Every great fantasy world starts with a map — but knowing where to begin can be daunting. In Part 1 of this series I cover the tools I use (both digital and analog), how to think about scale, and the very first marks you make on a blank page.',
+        content: `<p>Every fantasy world I have ever loved — Middle-earth, Roshar, Westeros — exists in my imagination as a geography first. Characters live <em>somewhere</em>. Armies march <em>across something</em>. Rivers drain <em>into somewhere</em>. Before I wrote a single scene of the Severance Chronicles, I drew a map. It was terrible. It was also one of the most useful things I ever did.</p>
+
+<p>This series is the guide I wish I'd had at the start: practical, opinionated, and focused on the kind of maps that serve a story rather than impress a cartography subreddit.</p>
+
+<h2>What You Actually Need</h2>
+
+<p>Let's clear up the tool question immediately, because it paralyses a lot of people. You do not need:</p>
+<ul>
+  <li>Expensive software (Inkscape and GIMP are free and excellent)</li>
+  <li>A drawing tablet (a mouse works fine for digital; pencil and paper works better for analog)</li>
+  <li>Any formal art training whatsoever</li>
+</ul>
+
+<p>What you do need is a willingness to make something ugly at first. The map that helps you write the book is not the map that ends up on the inside cover. Those are two different objects with two different jobs.</p>
+
+<h2>Analog vs. Digital</h2>
+
+<p>I always start analog — an A4 sheet of plain paper, a pencil, and a fine-liner for committing lines I like. Analog forces decisions. You can't endlessly undo. You can't zoom in to the pixel level and obsess over a coastline detail that will be invisible at print size. You make a mark, you live with it, you move on.</p>
+
+<p>Once the analog sketch is solid, I scan it and refine in Inkscape. This gives me clean vectors for any eventual print use, and lets me add colour layers without destroying the original linework.</p>
+
+<h2>Thinking About Scale Before You Draw Anything</h2>
+
+<p>The single most common mistake I see in first maps is inconsistent scale. A mountain range that looks a reasonable size turns out to be six hundred miles wide when you work backwards from the travel times in your story.</p>
+
+<p>Before you draw anything, answer these two questions:</p>
+<ol>
+  <li><strong>How long does it take to walk across your map?</strong> A fit human covers roughly 25 miles a day on good roads. How many days does the journey at the centre of your plot take?</li>
+  <li><strong>What is the largest real-world landmass you want to evoke?</strong> Western Europe? The continental US? A single island nation? Pick a real analogue and pin your map to that scale.</li>
+</ol>
+
+<p>Write those numbers at the top of your paper before the first line goes down. They will save you enormous continuity headaches later.</p>
+
+<h2>Your First Marks</h2>
+
+<p>In Part 2, we'll talk about coastlines and how to make them feel organic rather than geometric. But for now, your homework: take a blank sheet of paper, write your travel-time number and your scale analogue at the top, and draw a single irregular blob. That blob is your continent. It doesn't need to be good. It needs to exist.</p>
+
+<p>The map that helps you write is the map you make today, not the one you plan to make when you feel ready.</p>`,
+        tags: ['worldbuilding', 'mapmaking-guide', 'craft'],
+        featured: true,
+        highlight: true,
+        series: 'mapmaking-guide',
+        seriesOrder: 1,
+        readingTime: null,
+        image: null
+    },
+    {
+        id: 'mapmaking-part-2',
+        slug: 'mapmaking-part-2',
+        category: 'worldbuilding',
+        title: "The Worldbuilder's Map Guide, Part 2: Coastlines & Geography",
+        date: '2025-02-17',
+        dateFormatted: 'February 17, 2025',
+        excerpt: 'Coastlines are the hardest thing to draw naturally — and the easiest to get wrong. In Part 2 we cover how real geography works, why your mountains are probably in the wrong place, and techniques for making a world that feels ancient rather than designed.',
+        content: `<p>Last week you drew a blob. This week we make it feel like somewhere real.</p>
+
+<p>The tell that kills most fantasy maps is geometric coastlines. Real coasts are the product of millions of years of erosion, deposition, tectonic movement, and sea level change. They are <em>noisy</em> at every scale. A perfectly smooth bay is a human construction — a harbour, a reservoir — not a natural feature.</p>
+
+<h2>The Fractal Trick</h2>
+
+<p>Real coastlines are fractal: if you zoom in, you find the same kind of jaggedness at every level of detail. You don't need to simulate this mathematically; you just need to think at two scales when you draw.</p>
+
+<p>First pass: draw the large shapes — bays, peninsulas, the general in-and-out of the coast at the continental scale. Second pass, zoom in (or work with a finer pen) and add smaller-scale irregularities inside the shapes you just drew. The result will feel genuinely organic.</p>
+
+<h2>Where Mountains Actually Go</h2>
+
+<p>This is where most fantasy maps break geology. Mountains form at tectonic boundaries — where plates collide (creating fold mountains like the Himalayas or the Andes) or where older, harder rock resists erosion while everything around it wears away. They are almost never random. They form <em>ranges</em>, usually in long arcs.</p>
+
+<p>For your purposes, two rules will get you 80% of the way there:</p>
+<ol>
+  <li>Mountains follow the interior edge of your major landmasses, parallel to ancient coastlines</li>
+  <li>Rivers run away from mountains toward the sea. Every river needs a mountain or a high interior plateau as its source — rivers do not run uphill, they do not originate in the middle of plains</li>
+</ol>
+
+<p>If you violate rule 2, readers who care about geography will notice immediately. I know because I did it in my first draft map and three beta readers caught it independently.</p>
+
+<h2>Rain Shadows and Climate</h2>
+
+<p>Mountains create rain shadows. Moisture-laden air from the sea hits a mountain range, rises, cools, and drops its rain on the windward side. The leeward side is dry. This is why you get jungles on the west coasts of continents and deserts just inland of major ranges.</p>
+
+<p>Figure out which direction your prevailing winds blow (usually west-to-east in temperate latitudes, east-to-west in tropics) and your climate map will largely write itself. Deserts east of major ranges. Lush forests on the windward coasts. This gives your world a logic that readers feel even if they can't articulate why.</p>
+
+<h2>Next Week</h2>
+
+<p>In Part 3, the final instalment: how to add human geography — roads, cities, political borders — and how to letter and finish a map so it looks intentional rather than rough. We'll also talk about the difference between a working map and a presentable one, and when you need each.</p>`,
+        tags: ['worldbuilding', 'mapmaking-guide', 'craft'],
+        featured: false,
+        highlight: false,
+        series: 'mapmaking-guide',
+        seriesOrder: 2,
+        readingTime: null,
+        image: null
+    },
+    {
+        id: 'mapmaking-part-3',
+        slug: 'mapmaking-part-3',
+        category: 'worldbuilding',
+        title: "The Worldbuilder's Map Guide, Part 3: Cities, Roads & Finishing",
+        date: '2025-02-24',
+        dateFormatted: 'February 24, 2025',
+        excerpt: 'The final instalment: adding human geography to your world map. Where cities actually grow, how roads follow logic not aesthetics, and how to letter and finish a map so it looks like an artifact from inside the world rather than something you drew last Tuesday.',
+        content: `<p>We have coastlines. We have mountains in the right places, rivers running the right direction, and a rough sense of where it's wet and where it's dry. Now we add people.</p>
+
+<h2>Where Cities Grow</h2>
+
+<p>Cities do not grow where a ruler decided to put them. They grow where geography makes settlement easy and trade profitable. The checklist:</p>
+<ul>
+  <li><strong>Fresh water</strong> — every city is on or near a reliable water source. A river, a lake, a natural spring</li>
+  <li><strong>Defensibility</strong> — early settlements favour high ground, river bends, or peninsulas — something that makes attacking expensive</li>
+  <li><strong>Trade routes</strong> — where roads or rivers from multiple directions converge, a market town becomes a city</li>
+  <li><strong>Resources</strong> — near mines, forests, agricultural land, or fishing grounds</li>
+</ul>
+
+<p>If a city on your map fails all four of these tests, you need either a very good story reason for it being there, or you need to move it.</p>
+
+<h2>Roads Follow Logic</h2>
+
+<p>Roads connect cities. They find mountain passes rather than going over summits. They follow river valleys rather than fighting the terrain. They are not straight lines (that's a Roman special case for military roads, and even then only across flat terrain).</p>
+
+<p>Draw your roads after your cities. Let them find their own paths between the dots, bending around geographic obstacles. If two cities are on opposite sides of a mountain range, the road between them will go through the lowest available pass — and whoever controls that pass controls the trade between them. Story emerges from geography.</p>
+
+<h2>Political Borders</h2>
+
+<p>Borders follow rivers, mountain ridgelines, and the edges of natural regions — because these are the features that make them defensible and legible to the people living along them. A straight-line border, like the US-Canada 49th parallel, is almost always the result of political negotiation between powers who never actually went to look at the land in question. In a medieval-analog world, you'll rarely have those.</p>
+
+<h2>Lettering and Finishing</h2>
+
+<p>A few principles that separate a finished map from a sketch:</p>
+<ol>
+  <li><strong>Use font size to indicate importance</strong> — capitals in the largest text, towns smaller, villages smaller still, geographic features smaller than all settlements</li>
+  <li><strong>Curve labels to follow the feature</strong> — mountain range labels curve along the range, river names follow the river</li>
+  <li><strong>Leave breathing room</strong> — resist the urge to fill every empty space. Empty ocean and uninhabited wilderness are features, not failures</li>
+  <li><strong>Add a compass rose and scale bar</strong> — these transform a drawing into a map in the reader's eye</li>
+</ol>
+
+<p>Finally: the map that appears in your book should look like it was made by someone inside your world, with the knowledge and biases of that world. It doesn't need to be accurate from a god's-eye view — it needs to feel like an artifact. That framing will forgive a lot of imperfections, and it will give your map a character that purely technical maps lack.</p>
+
+<p>Good luck. Go draw something.</p>`,
+        tags: ['worldbuilding', 'mapmaking-guide', 'craft'],
+        featured: false,
+        highlight: false,
+        series: 'mapmaking-guide',
+        seriesOrder: 3,
+        readingTime: null,
+        image: null
+    },
+    // ── Existing posts ────────────────────────────────────────────────────
     {
         id: 'progress-update-jan-2025',
         slug: 'progress-update-jan-2025',
@@ -678,7 +848,7 @@ const newsData = [
         excerpt: 'Excited to share that the first draft of Servants of the Dying Sun has reached 45,000 words! Rennir\'s journey through the imperial palace is taking shape, and the political intrigue is intensifying. The magic system is proving to be more complex than I originally planned...',
         content: `Full article content would go here...`,
         tags: ['severance-chronicles', 'the-day-when-servants-reign', 'writing-progress'],
-        featured: true,
+        featured: false,
         highlight: true,
         readingTime: 3,
         image: null
@@ -790,6 +960,19 @@ const newsData = [
     }
 ];
 
+// Category display labels
+const categoryLabels = {
+    'progress': 'Book Progress',
+    'event': 'Event',
+    'behind-scenes': 'Behind the Scenes',
+    'spotlight': 'Reader Spotlight',
+    'worldbuilding': 'Worldbuilding',
+    'craft': 'Writing Craft',
+    'lore': 'Lore',
+    'update': 'Update'
+};
+const getCategoryLabel = (category) => categoryLabels[category] || category.replace(/-/g, ' ');
+
 // Helper functions to access data
 const getBookBySlug = (slug) => booksData[slug];
 const getSeriesBySlug = (slug) => seriesData[slug];
@@ -805,12 +988,31 @@ const getBooksInSeries = (seriesSlug) => {
     return series.books.map(bookSlug => booksData[bookSlug]).filter(Boolean);
 };
 
+// Post series helpers
+const getPostSeriesById = (id) => postSeries[id];
+const getSeriesPosts = (seriesId) => {
+    const s = postSeries[seriesId];
+    if (!s) return [];
+    return s.posts.map(slug => getNewsBySlug(slug)).filter(Boolean);
+};
+const getAllPostSeries = () => Object.values(postSeries);
+
+// Auto reading time: strips HTML tags, counts words at 300 wpm.
+// Returns null if content is a placeholder so callers can fall back to hardcoded readingTime.
+const calcReadingTime = (content) => {
+    if (!content || content.trim() === 'Full article content would go here...') return null;
+    const text = content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    const words = text.split(' ').filter(w => w.length > 0).length;
+    return Math.max(1, Math.ceil(words / 300));
+};
+
 // Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         seriesData,
         booksData,
         newsData,
+        postSeries,
         getBookBySlug,
         getSeriesBySlug,
         getNewsBySlug,
@@ -819,6 +1021,10 @@ if (typeof module !== 'undefined' && module.exports) {
         getNewsByTag,
         getFeaturedNews,
         getLatestNews,
-        getBooksInSeries
+        getBooksInSeries,
+        getPostSeriesById,
+        getSeriesPosts,
+        getAllPostSeries,
+        calcReadingTime
     };
 }

@@ -237,14 +237,14 @@ function renderLatestNews() {
     container.innerHTML = selectedPosts.map(post => {
         return `
             <article class="news-post-preview ${post.highlight ? 'highlight' : ''}" data-category="${post.category}">
-                <span class="post-category ${post.category}">${post.category.replace('-', ' ')}</span>
+                <span class="post-category ${post.category}">${getCategoryLabel(post.category)}</span>
                 <div class="post-date">${post.dateFormatted}</div>
                 <h3 class="post-title">${post.title}</h3>
                 <p class="post-excerpt">${post.excerpt}</p>
                 <div class="post-meta">
                     <span class="reading-time">${post.readingTime} min read</span>
                 </div>
-                <a href="news/${post.slug}.html" class="post-link">
+                <a href="/blog/${post.slug}" class="post-link">
                     Read More
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

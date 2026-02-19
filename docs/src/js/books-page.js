@@ -19,7 +19,7 @@ let allBooks = [];
 
 // Prepare books data
 function prepareBooksData() {
-    allBooks = Object.values(booksData).map(book => ({
+    allBooks = Object.values(booksData).filter(book => !book.hidden).map(book => ({
         ...book,
         statusCategory: book.published ? 'published' :
                        book.currentStage === 'Drafting' || book.currentStage === 'Prewriting' ? 'drafting' :
